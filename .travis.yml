@@ -25,8 +25,7 @@ before_deploy:
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 
 deploy:
-  on:
-    branch: master
-  skip_cleanup: true
   provider: script
   script: deploy.sh
+  on:
+    branch: master
