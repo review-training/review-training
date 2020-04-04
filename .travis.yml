@@ -1,0 +1,12 @@
+sudo: required
+language: java
+services:
+  - docker
+
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
+    - DATETIME=$(date +"%y%m%d%H%M%S")
+
+script:
+  - ./mvnw clean install
