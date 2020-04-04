@@ -19,12 +19,11 @@ script:
   - ./mvnw clean install
 
 after_success:
-  - git tag -a $TAG -m "Creating tag version $TAG"
-  - git push origin $TAG
   - docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest -t brunokarpo/review-app:$TAG app/.
 
 deploy:
   on:
     branch: master
   skip_cleanup: true
+  provider: script
   script: deploy.sh
