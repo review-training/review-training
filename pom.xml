@@ -10,4 +10,8 @@
 
   <name>Review Root</name>
 
+  <modules>
+    <module>app</module>
+  </modules>
+
 </project>
