@@ -5,8 +5,26 @@ services:
 
 env:
   global:
-    - SHA=$(git rev-parse HEAD)
+    - SHA=$(git rev-parse --short HEAD)
     - DATETIME=$(date +"%y%m%d%H%M%S")
+    - TAG=$DATETIME-$SHA
+
+addons:
+  sonarcloud:
+    organization: "brunokarpo"
+    token:
+      secure: "$SONAR_TOKEN"
 
 script:
   - ./mvnw clean install
+
+after_success:
+  - git tag -a $TAG -m "Creating tag version $TAG"
+  - git push origin $TAG
+  - docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest -t brunokarpo/review-app:$TAG app/.
+
+deploy:
+  on:
+    branch: master
+  skip_cleanup: true
+  script: deploy.sh
