@@ -1,3 +1,5 @@
+DEFAULT: _package
+
 _clean:
 	./mvnw clean
 
