@@ -46,10 +46,19 @@
     </dependency>
 
     <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jsonb</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib-jdk8</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>nom.brunokarpo.review</groupId>
+      <artifactId>core</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -174,12 +183,6 @@
                 <phase>prepare-package</phase>
                 <goals>
                   <goal>report</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>jacoco-check</id>
-                <goals>
-                  <goal>check</goal>
                 </goals>
               </execution>
             </executions>
