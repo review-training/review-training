@@ -7,6 +7,7 @@ cache:
   directories:
     - .autoconf
     - $HOME/.m2
+    - $HOME/.sonar/cache
 
 env:
   global:
@@ -18,11 +19,11 @@ addons:
   sonarcloud:
     organization: "brunokarpo"
     token:
-      secure: $SONAR_TOKEN
+      secure: "I7tY7qwFkoXfKeFdhykwkYkZnY/I3pEHiMYmCZu01DOveB3hmLeQEeSs20VypElVp1Gg+jRVo5jElw1Gn/kgMkFo939+3dOGSSQNqJJoCm2TwFe1iCSUi9Y/V779A/jdjPKcuMVvGeerR3dCYlUsYphKHYqUQa5mQaCXwst1gFJ0skU5XDTT9Dd45ypjA6OT5U81M0K53F3VcBF9q7/RWBQJu7Kwu9XkdbIVK0HwOtZiyIUsOjT1/3yRG7RzLQ9i8poIcnF1z/8zp67rr8M8OmvB+T+JTTK8Oc9zoQJ38F2G5zUQxOYm+SOUg54jMncEpgy1VoKiJvCsXkDKsdf55fC7mYueX9CqCNKtLoz84Ox8RfBGix199lhj5RWZ8TYB83PC0ag4ycEdbQdbyiuZ5fj3omM/pJQ1Lzx38lZQJ+z4yM5OUfWGRevendeCzhbgwDzSqgpPa0d0qutvSH3GhVj9OZSwmXsK6n09BdCFyeYh1xABmmj/RRybjAK+d3k+wlZOCT7yf466NMOXbfQWIeSB2Lo9xZGqh5uujvqYhgCGgwf/zQGE/f9c+KZ4pv7hOGtIhte/z//yozHgJC742OIJ8/lxcRKLi6O36Gvm2pBfHKCqhTOuxPWKIaJPHwit64cXdjApROQEkdg/SD03xcgUsugqOjmrJKV6Q+Gs8Sw="
 
 script:
-  - ./mvnw clean install
-  - sonar-scanner
+  - ./mvnw clean package
+  - ./mvnw clean verify sonar:sonar -Pcoverage
 
 after_success:
   - docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest -t brunokarpo/review-app:$TAG app/.
