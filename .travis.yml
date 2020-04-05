@@ -19,11 +19,11 @@ addons:
   sonarcloud:
     organization: "brunokarpo"
     token:
-      secure: "I7tY7qwFkoXfKeFdhykwkYkZnY/I3pEHiMYmCZu01DOveB3hmLeQEeSs20VypElVp1Gg+jRVo5jElw1Gn/kgMkFo939+3dOGSSQNqJJoCm2TwFe1iCSUi9Y/V779A/jdjPKcuMVvGeerR3dCYlUsYphKHYqUQa5mQaCXwst1gFJ0skU5XDTT9Dd45ypjA6OT5U81M0K53F3VcBF9q7/RWBQJu7Kwu9XkdbIVK0HwOtZiyIUsOjT1/3yRG7RzLQ9i8poIcnF1z/8zp67rr8M8OmvB+T+JTTK8Oc9zoQJ38F2G5zUQxOYm+SOUg54jMncEpgy1VoKiJvCsXkDKsdf55fC7mYueX9CqCNKtLoz84Ox8RfBGix199lhj5RWZ8TYB83PC0ag4ycEdbQdbyiuZ5fj3omM/pJQ1Lzx38lZQJ+z4yM5OUfWGRevendeCzhbgwDzSqgpPa0d0qutvSH3GhVj9OZSwmXsK6n09BdCFyeYh1xABmmj/RRybjAK+d3k+wlZOCT7yf466NMOXbfQWIeSB2Lo9xZGqh5uujvqYhgCGgwf/zQGE/f9c+KZ4pv7hOGtIhte/z//yozHgJC742OIJ8/lxcRKLi6O36Gvm2pBfHKCqhTOuxPWKIaJPHwit64cXdjApROQEkdg/SD03xcgUsugqOjmrJKV6Q+Gs8Sw="
+      secure: "uPRHpX9k7e0h5UR56RQmqRQaKwPlmC3pFOVKc5aZPEw1jwo4wqUtMpPLOfCQZiZ9XOOCqGEAlrDYWyJnsHqauLx3jgxrJmo+3Ono0k1uobQUI/jPSS5JYEdAb1cVbgfj/tzu+nJK8gyeR7V2tZknYoYc578h2rm5dsbIQCwnHRAtOTHv2fJCqiX/k4C1EbtvcVGSCg9bfLFi2pmGFP4lpe2uwB8uqBCJA2xVxJk7N/xx/9dEjxs88S75ye7EmjstqtgQmJfUlQmKidMZG2jRfC6dQFN3fZzcUhPHHcuXzt5NRxa8cj3MF26Ifdgcvi7hHo8EzfacVTZiMXNS6Tvtw5AqPE7mLb0sdA5zNSpG4Db/hrxgt0NL3XDMYPO29v4YPjxrQTifouDtDpW4EA486UPYhzw86eyvWrAeNeaXZPihf0eg9Wd0393+IifZ9pYSFLRLzhDhg/HMWSouNGgNxv6IEyRpOCuYA+h/fB7S/dakRbWiDUUtN3BRjNwn+W1WF1danmEAGFacEiphgd9QXLVz8cvXcJMheKM1Z4FdBYhi8/FoEtX9waEcxesC7+FXcid03pwUiExSF10G71HEvnmDsPstb47HHSd1MEBsd4MWavJvDNc8OlSbhQBRLEerpVSllNy0IpaOBjF1lTwQm8g8m8tUoma/bnk4RCU80qo="
 
 script:
   - ./mvnw clean package
-  - ./mvnw clean verify sonar:sonar -Pcoverage
+  - ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=brunokarpo_review-training
 
 after_success:
   - docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest -t brunokarpo/review-app:$TAG app/.
