@@ -12,13 +12,14 @@
     <artifactId>core</artifactId>
     <packaging>jar</packaging>
 
-    <name>nom.brunokarpo.review core</name>
+    <name>Review - Core</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.3.71</kotlin.version>
         <kotlin.code.style>official</kotlin.code.style>
         <junit.jupiter.version>5.6.0</junit.jupiter.version>
+        <mockk.version>1.9.3.kotlin12</mockk.version>
     </properties>
 
     <dependencies>
@@ -38,6 +39,11 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.mockk</groupId>
+            <artifactId>mockk</artifactId>
+            <version>${mockk.version}</version>
         </dependency>
     </dependencies>
 
