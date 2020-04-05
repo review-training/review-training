@@ -23,7 +23,7 @@ addons:
 
 script:
   - ./mvnw clean package
-  - ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=brunokarpo_review-training
+  - ./mvnw clean install -Pcoverage sonar:sonar -Dsonar.projectKey=brunokarpo_review-training
 
 after_success:
   - docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest -t brunokarpo/review-app:$TAG app/.
