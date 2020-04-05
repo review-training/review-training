@@ -1,5 +1,7 @@
 package nom.brunokarpo.review.repository.jdbc
 
+import org.flywaydb.core.Flyway
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.testcontainers.containers.PostgreSQLContainerProvider
 import org.testcontainers.junit.jupiter.Container
@@ -15,6 +17,13 @@ class ReviewRepositoryJdbcTest {
             .withUsername("review-app")
             .withPassword("review-app")
 
+    @BeforeEach
+    internal fun setUp() {
+        Flyway.configure()
+                .dataSource(postgresContainer.getJdbcUrl(), postgresContainer.getUsername(), postgresContainer.getPassword())
+                .load()
+                .migrate()
+    }
 
     @Test
     internal fun `should connect to database`() {
