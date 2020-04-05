@@ -1,4 +1,4 @@
-package nom.brunokarpo.review.core.service
+package nom.brunokarpo.review.core.usercases
 
 import io.mockk.Runs
 import io.mockk.every
