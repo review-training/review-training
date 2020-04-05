@@ -17,6 +17,7 @@ addons:
 
 script:
   - ./mvnw clean install
+  - sonar-scanner
 
 after_success:
   - docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest -t brunokarpo/review-app:$TAG app/.

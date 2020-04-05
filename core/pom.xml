@@ -20,6 +20,7 @@
         <kotlin.code.style>official</kotlin.code.style>
         <junit.jupiter.version>5.6.0</junit.jupiter.version>
         <mockk.version>1.9.3.kotlin12</mockk.version>
+        <jacoco-plugin.version>0.8.5</jacoco-plugin.version>
     </properties>
 
     <dependencies>
@@ -69,6 +70,26 @@
                         <phase>test-compile</phase>
                         <goals>
                             <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-check</id>
+                        <goals>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
