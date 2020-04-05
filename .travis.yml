@@ -18,7 +18,7 @@ addons:
   sonarcloud:
     organization: "brunokarpo"
     token:
-      secure: "$SONAR_TOKEN"
+      secure: $SONAR_TOKEN
 
 script:
   - ./mvnw clean install
