@@ -25,6 +25,7 @@
     <module>core</module>
     <module>repository-gateway</module>
     <module>repository-jdbc</module>
+      <module>database-migrations</module>
   </modules>
 
   <dependencyManagement>
@@ -51,6 +52,12 @@
       <dependency>
         <groupId>nom.brunokarpo.review</groupId>
         <artifactId>repository-jdbc</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nom.brunokarpo.review</groupId>
+        <artifactId>database-migrations</artifactId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
 

@@ -16,7 +16,7 @@ class ReviewRepositoryJdbcTest: DatabaseTestBase() {
 
     @BeforeEach
     internal fun setUp() {
-        sut = ReviewRepositoryJdbc(dataSource)
+        sut = ReviewRepositoryJdbc(DATA_SOURCE)
     }
 
     @Test
@@ -30,7 +30,7 @@ class ReviewRepositoryJdbcTest: DatabaseTestBase() {
 
         sut.create(review)
 
-        val ps = dataSource.connection.prepareStatement("SELECT restaurant_id, order_id, user_id, review FROM review WHERE restaurant_id = ?")
+        val ps = DATA_SOURCE.connection.prepareStatement("SELECT restaurant_id, order_id, user_id, review FROM review WHERE restaurant_id = ?")
         ps.setObject(1, restId, Types.OTHER)
 
         val rs = ps.executeQuery()
@@ -52,7 +52,7 @@ class ReviewRepositoryJdbcTest: DatabaseTestBase() {
 
         sut.create(review)
 
-        val ps = dataSource.connection.prepareStatement("SELECT restaurant_id, average, qtd_review FROM review_summary WHERE restaurant_id = ?")
+        val ps = DATA_SOURCE.connection.prepareStatement("SELECT restaurant_id, average, qtd_review FROM review_summary WHERE restaurant_id = ?")
         ps.setObject(1, restId, Types.OTHER)
 
         val rs = ps.executeQuery()
