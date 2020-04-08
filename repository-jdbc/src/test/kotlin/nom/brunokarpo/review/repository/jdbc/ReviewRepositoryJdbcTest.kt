@@ -22,9 +22,7 @@ class ReviewRepositoryJdbcTest: DatabaseTestBase() {
     internal fun setUp() {
         sut = ReviewRepositoryJdbc(DATA_SOURCE)
 
-        val scriptRunner = ScriptRunner(DATA_SOURCE.connection)
-        val reader = BufferedReader(FileReader(System.getProperty("user.dir") + "/src/test/resources/database/load-database.sql"))
-        scriptRunner.runScript(reader)
+        loadDatabase()
     }
 
     @Test
@@ -93,8 +91,6 @@ class ReviewRepositoryJdbcTest: DatabaseTestBase() {
 
     @AfterEach
     internal fun tearDown() {
-        val scriptRunner = ScriptRunner(DATA_SOURCE.connection)
-        val reader = BufferedReader(FileReader(System.getProperty("user.dir") + "/src/test/resources/database/clean-database.sql"))
-        scriptRunner.runScript(reader)
+        cleanDatabase()
     }
 }

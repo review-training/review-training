@@ -6,6 +6,6 @@ import java.util.*
 
 interface ReviewSummaryRepositoryGateway: ReviewSummaryRepository {
 
-    override fun getByRestaurantId(restaurantId: UUID): ReviewSummary
+    override fun getByRestaurantId(restaurantId: UUID): ReviewSummary?
 
 }

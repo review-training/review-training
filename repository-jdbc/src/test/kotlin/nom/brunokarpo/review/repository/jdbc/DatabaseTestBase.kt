@@ -1,8 +1,11 @@
 package nom.brunokarpo.review.repository.jdbc
 
+import org.apache.ibatis.jdbc.ScriptRunner
 import org.flywaydb.core.Flyway
 import org.postgresql.ds.PGSimpleDataSource
 import org.testcontainers.containers.PostgreSQLContainerProvider
+import java.io.BufferedReader
+import java.io.FileReader
 import javax.sql.DataSource
 
 abstract class DatabaseTestBase {
@@ -32,5 +35,17 @@ abstract class DatabaseTestBase {
                 .dataSource(POSTGRES_CONTAINER.getJdbcUrl(), POSTGRES_CONTAINER.getUsername(), POSTGRES_CONTAINER.getPassword())
                 .load()
                 .migrate()
+    }
+
+    fun loadDatabase() {
+        val scriptRunner = ScriptRunner(DATA_SOURCE.connection)
+        val reader = BufferedReader(FileReader(System.getProperty("user.dir") + "/src/test/resources/database/load-database.sql"))
+        scriptRunner.runScript(reader)
+    }
+
+    fun cleanDatabase() {
+        val scriptRunner = ScriptRunner(DATA_SOURCE.connection)
+        val reader = BufferedReader(FileReader(System.getProperty("user.dir") + "/src/test/resources/database/clean-database.sql"))
+        scriptRunner.runScript(reader)
     }
 }
