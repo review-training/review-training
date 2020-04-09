@@ -1,14 +1,35 @@
 package nom.brunokarpo.review.resource
 
+import com.github.dockerjava.api.model.ExposedPort
+import com.github.dockerjava.api.model.PortBinding
+import com.github.dockerjava.api.model.Ports
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers
 import org.junit.jupiter.api.Test
+import org.testcontainers.containers.PostgreSQLContainerProvider
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.util.*
 
+@Testcontainers
 @QuarkusTest
 class ReviewResourceTest {
+
+    companion object {
+        @Container
+        private val db = PostgreSQLContainerProvider().newInstance()
+                .withDatabaseName("review")
+                .withUsername("review-app")
+                .withPassword("review-app")
+                .withExposedPorts(5432)
+                .withCreateContainerCmdModifier { cmd ->
+                    cmd
+                            .withHostName("localhost")
+                            .withPortBindings(PortBinding(Ports.Binding.bindPort(5432), ExposedPort(5432)))
+                }
+    }
 
     @Test
     internal fun `should create new review`() {

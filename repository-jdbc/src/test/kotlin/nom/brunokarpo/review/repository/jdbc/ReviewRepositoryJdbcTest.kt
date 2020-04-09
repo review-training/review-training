@@ -1,13 +1,10 @@
 package nom.brunokarpo.review.repository.jdbc
 
 import nom.brunokarpo.review.core.model.Review
-import org.apache.ibatis.jdbc.ScriptRunner
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import java.io.BufferedReader
-import java.io.FileReader
 import java.sql.Types
 import java.util.*
 import kotlin.test.assertEquals

@@ -1,32 +1,24 @@
 package nom.brunokarpo.review.configurations.core.repository
 
+import io.agroal.api.AgroalDataSource
 import io.quarkus.arc.DefaultBean
-import nom.brunokarpo.review.core.model.Review
-import nom.brunokarpo.review.core.model.ReviewSummary
-import nom.brunokarpo.review.core.repository.ReviewRepository
-import nom.brunokarpo.review.core.repository.ReviewSummaryRepository
-import java.math.BigDecimal
-import java.util.*
+import nom.brunokarpo.review.repository.jdbc.ReviewRepositoryJdbc
+import nom.brunokarpo.review.repository.jdbc.ReviewSummaryRepositoryJdbc
 import javax.enterprise.context.Dependent
 import javax.enterprise.inject.Produces
+import javax.inject.Inject
 
 @Dependent
-class RepositoryConfiguration {
+class RepositoryConfiguration(
+        @Inject val dataSource: AgroalDataSource
+) {
 
     @Produces
     @DefaultBean
-    fun reviewRepository() = object : ReviewRepository {
-        override fun create(review: Review) {
-            println("I created it. Believe it!")
-        }
-    }
+    fun reviewRepository() = ReviewRepositoryJdbc(dataSource)
 
     @Produces
     @DefaultBean
-    fun reviewSummaryRepository() = object : ReviewSummaryRepository {
-        override fun getByRestaurantId(restaurantId: UUID): ReviewSummary {
-            return ReviewSummary(restaurantId, 1, BigDecimal.valueOf(5.0))
-        }
-    }
+    fun reviewSummaryRepository() = ReviewSummaryRepositoryJdbc(dataSource)
 
 }
