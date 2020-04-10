@@ -1,0 +1,23 @@
+version: '3'
+services:
+  database:
+    image: postgres:9.6-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: review
+      POSTGRES_USER: review-app
+      POSTGRES_PASSWORD: review-app
+
+  app:
+    build:
+      context: app/
+      dockerfile: src/main/docker/Dockerfile.jvm
+    restart: on-failure
+    environment:
+      quarkus.datasource.username: review-app
+      quarkus.datasource.password: review-app
+      quarkus.datasource.jdbc.url: jdbc:postgresql://database:5432/review
+    ports:
+    - 8080:8080
+    depends_on:
+      - database

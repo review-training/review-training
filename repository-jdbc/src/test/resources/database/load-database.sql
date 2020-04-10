@@ -1,0 +1,6 @@
+INSERT INTO review (restaurant_id, user_id, order_id, created_at, review) VALUES ('5c5749a5-e0e3-42a0-9d26-a428eb2e5344', '82b63123-af07-4105-9532-88996f166dbd', '80ca5daa-b265-4e58-93ab-f85a1d7e78ac', '2020-04-07T20:49:02.124', 5);
+INSERT INTO review (restaurant_id, user_id, order_id, created_at, review) VALUES ('5c5749a5-e0e3-42a0-9d26-a428eb2e5344', 'ad4120b0-6b0d-497a-bd49-8c6e388ee0eb', '5cdc8eca-113d-45a0-89b4-dc92b95d282d', '2020-04-07T20:50:45.123', 4);
+INSERT INTO review (restaurant_id, user_id, order_id, created_at, review) VALUES ('5c5749a5-e0e3-42a0-9d26-a428eb2e5344', '5fb4d3a0-01ed-496d-a6fe-acc4ddc73236', 'b776e98a-6edb-420c-abc0-3623a3cadcde', '2020-04-07T20:51:45.123', 4);
+INSERT INTO review (restaurant_id, user_id, order_id, created_at, review) VALUES ('5c5749a5-e0e3-42a0-9d26-a428eb2e5344', 'e38b8845-6e4b-41a6-9cd9-1470c56cc0bd', 'bfd4f6a0-4052-4588-a2f7-9f1c619d8b46', '2020-04-07T20:52:45.123', 5);
+
+INSERT INTO review_summary (restaurant_id, average, qtd_review) VALUES ('811bfc9f-4ac6-496c-ac1a-566de4974bd0', 4.9, 520);

@@ -8,6 +8,6 @@ data class Review(
         val restaurantId: UUID,
         val userId: UUID,
         val orderId: UUID,
-        val date: LocalDateTime = LocalDateTime.now(ZoneOffset.UTC),
+        val createdAt: LocalDateTime = LocalDateTime.now(ZoneOffset.UTC),
         var review: Int
 )

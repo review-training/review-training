@@ -37,9 +37,17 @@ RUN microdnf install openssl curl ca-certificates ${JAVA_PACKAGE} \
 
 # Configure the JAVA_OPTIONS, you can add -XshowSettings:vm to also display the heap size.
 ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
+ENV quarkus.datasource.db-kind=postgresql
+ENV quarkus.datasource.username=review-app
+ENV quarkus.datasource.password=review-app
+ENV quarkus.datasource.jdbc.url=jdbc:postgresql://localhost:5432/review
+ENV quarkus.datasource.jdbc.min-size=1
+ENV quarkus.datasource.jdbc.max-size=5
+ENV quarkus.flyway.migrate-at-start=true
 
 COPY target/lib/* /deployments/lib/
 COPY target/*-runner.jar /deployments/app.jar
+
 
 EXPOSE 8080
 USER 1001
