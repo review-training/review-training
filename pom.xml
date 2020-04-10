@@ -16,7 +16,7 @@
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.language>kotlin</sonar.language>
-    <junit-platform.version>5.6.0</junit-platform.version>
+    <junit-platform.version>5.6.1</junit-platform.version>
     <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
   </properties>
 

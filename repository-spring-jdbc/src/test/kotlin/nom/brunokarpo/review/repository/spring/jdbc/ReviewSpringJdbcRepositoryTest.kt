@@ -2,6 +2,7 @@ package nom.brunokarpo.review.repository.spring.jdbc
 
 import nom.brunokarpo.review.core.model.Review
 import nom.brunokarpo.review.core.model.ReviewSummary
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
@@ -9,14 +10,12 @@ import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.context.jdbc.SqlGroup
 import java.math.BigDecimal
 import java.util.*
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 
 @SqlGroup(
         Sql(value = ["/load-database.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
         Sql(value = ["/clean-database.sql"], executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 )
-class ReviewSpringJdbcRepositoryTest: JdbcDatabaseTest() {
+class ReviewSpringJdbcRepositoryTest: DatabaseTestBase() {
 
     @Autowired
     private lateinit var sut: ReviewSpringJdbcRepository
@@ -43,11 +42,11 @@ class ReviewSpringJdbcRepositoryTest: JdbcDatabaseTest() {
                     review = rs.getInt("review"))
         }[0]
 
-        assertNotNull(result)
-        assertEquals(restaurantId, result.restaurantId)
-        assertEquals(userId, result.userId)
-        assertEquals(orderId, result.orderId)
-        assertEquals(5, result.review)
+        assertThat(result).isNotNull
+        assertThat(result.restaurantId).isEqualTo(restaurantId)
+        assertThat(result.userId).isEqualTo(userId)
+        assertThat(result.orderId).isEqualTo(orderId)
+        assertThat(result.review).isEqualTo(5)
     }
 
     @Test
@@ -66,9 +65,9 @@ class ReviewSpringJdbcRepositoryTest: JdbcDatabaseTest() {
                     qtdReview = rs.getInt("qtd_review"), average = rs.getBigDecimal("average"))
         }[0]
 
-        assertNotNull(result)
-        assertEquals(restaurantId, result.restaurantId)
-        assertEquals(BigDecimal.valueOf(4.6), result.average)
-        assertEquals(5, result.qtdReview)
+        assertThat(result).isNotNull
+        assertThat(result.restaurantId).isEqualTo(restaurantId)
+        assertThat(result.average).isEqualTo(BigDecimal.valueOf(4.6))
+        assertThat(result.qtdReview).isEqualTo(5)
     }
 }

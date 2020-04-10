@@ -13,7 +13,7 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @ActiveProfiles("test")
 @Testcontainers
 @ExtendWith(SpringExtension::class)
-abstract class JdbcDatabaseTest {
+abstract class DatabaseTestBase {
 
     companion object {
         @Container
