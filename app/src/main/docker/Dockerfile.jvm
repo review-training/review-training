@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim-sid
+FROM openjdk:11-jre-slim
 
 LABEL maintainer="Bruno Nogueira <ti.brunonogueira at gmail.com"
 LABEL version="1.0"
@@ -9,4 +9,11 @@ COPY target/app-*.jar /app/review-app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT java	-jar review-app.jar
+ENV DATABASE_URL=jdbc:postgresql://localhost:5432/review
+ENV DATABASE_USERNAME=review-app
+ENV DATABASE_PASSWORD=review-app
+
+ENTRYPOINT java	-Dspring.datasource.url=${DATABASE_URL} \
+ -Dspring.datasource.username=${DATABASE_USERNAME} \
+ -Dspring.datasource.password=${DATABASE_PASSWORD} \
+ -jar review-app.jar
