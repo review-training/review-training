@@ -1,0 +1,19 @@
+apiVersion: v1
+items:
+  - apiVersion: autoscaling/v1
+    kind: HorizontalPodAutoscaler
+    metadata:
+      name: review-application-hpa
+      namespace: review-application
+    spec:
+      maxReplicas: 10
+      minReplicas: 2
+      scaleTargetRef:
+        apiVersion: extensions/v1beta1
+        kind: Deployment
+        name: review-application-deployment
+      targetCPUUtilizationPercentage: 90
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

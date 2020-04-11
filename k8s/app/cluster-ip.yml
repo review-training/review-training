@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: review-application-cluster-ip
+  namespace: review-application
+spec:
+  type: ClusterIP
+  selector:
+    component: backend
+  ports:
+    - name: app
+      port: 8080
+      targetPort: 8080

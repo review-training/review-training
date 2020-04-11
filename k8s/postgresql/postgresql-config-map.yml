@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: review-application
+data:
+  POSTGRES_DB: review
+  POSTGRES_USER: review-app

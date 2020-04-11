@@ -17,3 +17,9 @@ docker-build-image: _build
 
 docker-run: docker-build-image
 	docker-compose up --build -d
+
+k8s-deploy:
+	kubectl apply -f k8s/namespace.yml
+	kubectl create secret generic pg-password --from-literal=POSTGRES_PASSWORD='my-random-password' --namespace="review-application"
+	kubectl apply -f k8s/postgresql/
+	kubectl apply -f k8s/app/

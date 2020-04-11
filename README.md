@@ -54,3 +54,10 @@ With `make`:
 ```shell script
 make docker-run
 ```
+
+
+### Creating a secret in K8S
+
+```shell script
+kubectl create secret generic pg-password --from-literal=POSTGRES_PASSWORD='<<type secret here>>' --namespace="review-application"
+```
