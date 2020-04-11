@@ -5,22 +5,23 @@ import nom.brunokarpo.review.app.ReviewApplication
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.util.TestPropertyValues
 import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.context.ApplicationContextInitializer
+import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.testcontainers.containers.PostgreSQLContainerProvider
-import org.testcontainers.junit.jupiter.Container
-import org.testcontainers.junit.jupiter.Testcontainers
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [ReviewApplication::class])
 @ActiveProfiles("test")
-@Testcontainers
+@ContextConfiguration(initializers = [ReviewApplicationTest.Initializer::class])
 @ExtendWith(SpringExtension::class)
 abstract class ReviewApplicationTest {
 
     companion object {
-        @Container
         private val POSTGRES_CONTAINER = PostgreSQLContainerProvider()
                 .newInstance()
                 .withDatabaseName("review")
@@ -28,12 +29,16 @@ abstract class ReviewApplicationTest {
                 .withPassword("review-app")
     }
 
-    init {
-        POSTGRES_CONTAINER.start()
+    internal class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
+        override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {
+            POSTGRES_CONTAINER.start()
 
-        System.setProperty("spring.datasource.url", POSTGRES_CONTAINER.getJdbcUrl())
-        System.setProperty("spring.datasource.username", POSTGRES_CONTAINER.getUsername())
-        System.setProperty("spring.datasource.password", POSTGRES_CONTAINER.getPassword())
+            TestPropertyValues.of(
+                    "spring.datasource.url=${POSTGRES_CONTAINER.getJdbcUrl()}",
+                    "spring.datasource.username=${POSTGRES_CONTAINER.getUsername()}",
+                    "spring.datasource.password=${POSTGRES_CONTAINER.getPassword()}"
+            ).applyTo(configurableApplicationContext.environment)
+        }
     }
 
     @LocalServerPort
