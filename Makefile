@@ -6,11 +6,14 @@ _clean:
 _package: _clean
 	./mvnw package
 
-run-locally:
-	./mvnw -f app compile quarkus:dev
+_build: _clean
+	./mvnw package -DskipTests -DskipITs
 
-docker-build-image:
+run-locally: _build
+	./mvnw -f app spring-boot:run
+
+docker-build-image: _build
 	docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest app/.
 
 docker-run: docker-build-image
-	docker container run --rm --publish 8080:8080 --name review-app brunokarpo/review-app:latest
+	docker-compose up --build -d

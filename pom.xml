@@ -16,7 +16,7 @@
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.language>kotlin</sonar.language>
-    <junit-platform.version>5.6.0</junit-platform.version>
+    <junit-platform.version>5.6.1</junit-platform.version>
     <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
   </properties>
 
@@ -24,8 +24,8 @@
     <module>app</module>
     <module>core</module>
     <module>repository-gateway</module>
-    <module>repository-jdbc</module>
-      <module>database-migrations</module>
+    <module>database-migrations</module>
+    <module>repository-spring-jdbc</module>
   </modules>
 
   <dependencyManagement>
@@ -51,7 +51,7 @@
 
       <dependency>
         <groupId>nom.brunokarpo.review</groupId>
-        <artifactId>repository-jdbc</artifactId>
+        <artifactId>repository-spring-jdbc</artifactId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
 

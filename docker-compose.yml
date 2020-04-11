@@ -14,9 +14,9 @@ services:
       dockerfile: src/main/docker/Dockerfile.jvm
     restart: on-failure
     environment:
-      quarkus.datasource.username: review-app
-      quarkus.datasource.password: review-app
-      quarkus.datasource.jdbc.url: jdbc:postgresql://database:5432/review
+      DATABASE_URL: "jdbc:postgresql://database:5432/review"
+      DATABASE_USERNAME: review-app
+      DATABASE_PASSWORD: review-app
     ports:
     - 8080:8080
     depends_on:

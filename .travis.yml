@@ -1,4 +1,5 @@
-sudo: required
+os: linux
+dist: xenial
 language: java
 services:
   - docker
@@ -22,7 +23,6 @@ addons:
       secure: "uPRHpX9k7e0h5UR56RQmqRQaKwPlmC3pFOVKc5aZPEw1jwo4wqUtMpPLOfCQZiZ9XOOCqGEAlrDYWyJnsHqauLx3jgxrJmo+3Ono0k1uobQUI/jPSS5JYEdAb1cVbgfj/tzu+nJK8gyeR7V2tZknYoYc578h2rm5dsbIQCwnHRAtOTHv2fJCqiX/k4C1EbtvcVGSCg9bfLFi2pmGFP4lpe2uwB8uqBCJA2xVxJk7N/xx/9dEjxs88S75ye7EmjstqtgQmJfUlQmKidMZG2jRfC6dQFN3fZzcUhPHHcuXzt5NRxa8cj3MF26Ifdgcvi7hHo8EzfacVTZiMXNS6Tvtw5AqPE7mLb0sdA5zNSpG4Db/hrxgt0NL3XDMYPO29v4YPjxrQTifouDtDpW4EA486UPYhzw86eyvWrAeNeaXZPihf0eg9Wd0393+IifZ9pYSFLRLzhDhg/HMWSouNGgNxv6IEyRpOCuYA+h/fB7S/dakRbWiDUUtN3BRjNwn+W1WF1danmEAGFacEiphgd9QXLVz8cvXcJMheKM1Z4FdBYhi8/FoEtX9waEcxesC7+FXcid03pwUiExSF10G71HEvnmDsPstb47HHSd1MEBsd4MWavJvDNc8OlSbhQBRLEerpVSllNy0IpaOBjF1lTwQm8g8m8tUoma/bnk4RCU80qo="
 
 script:
-  - ./mvnw clean package
   - ./mvnw clean install -Pcoverage sonar:sonar -Dsonar.projectKey=brunokarpo_review-training
 
 after_success:
