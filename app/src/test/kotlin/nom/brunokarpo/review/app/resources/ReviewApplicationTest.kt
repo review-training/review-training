@@ -47,5 +47,6 @@ abstract class ReviewApplicationTest {
     @BeforeEach
     internal fun setUp() {
         RestAssured.port = port!!
+        RestAssured.basePath = "/review"
     }
 }
