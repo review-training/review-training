@@ -9,6 +9,9 @@ _package: _clean
 _build: _clean
 	./mvnw package -DskipTests -DskipITs
 
+build: _clean
+	./mvnw install
+
 run-locally: _build
 	./mvnw -f app spring-boot:run
 
