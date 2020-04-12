@@ -33,8 +33,7 @@ class RetrieveSummaryReviewByRestaurantIdUseCaseTest {
 
         every {
             reviewSummaryRepository.getByRestaurantId(restaurantId)
-        } returns
-                Optional.of(reviewSummary)
+        } returns reviewSummary
 
         val result = sut.execute(restaurantId)
 

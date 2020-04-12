@@ -47,7 +47,7 @@ class CreateNewReviewUserCaseTest {
         review = Review(restaurantId = RESTAURANT_ID, userId = USER_ID, orderId = ORDER_ID, review = REVIEW)
         reviewSummary = ReviewSummary(restaurantId = RESTAURANT_ID, qtdReview = REVIEW_QTD, average = AVERAGE)
         every { reviewRepository.create(any()) } just Runs
-        every { reviewSummaryRepository.getByRestaurantId(RESTAURANT_ID) } returns Optional.of(reviewSummary)
+        every { reviewSummaryRepository.getByRestaurantId(RESTAURANT_ID) } returns reviewSummary
 
     }
 
