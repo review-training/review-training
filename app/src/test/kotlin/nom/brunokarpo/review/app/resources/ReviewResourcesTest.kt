@@ -37,7 +37,7 @@ class ReviewResourcesTest: ReviewApplicationTest() {
                 .and()
                     .statusCode(201)
                     .contentType(ContentType.JSON)
-                    .header("Location", Matchers.endsWith("/review/$restId"))
+                    .header("Location", Matchers.endsWith("/review?restaurant_id=$restId"))
                     .body("restaurantId", Matchers.equalTo(restId.toString()),
                             "average", Matchers.equalTo(5.0f),
                             "qtdReview", Matchers.equalTo(1))
@@ -66,7 +66,7 @@ class ReviewResourcesTest: ReviewApplicationTest() {
                 .and()
                     .statusCode(201)
                     .contentType(ContentType.JSON)
-                    .header("Location", Matchers.endsWith("/review/$restId"))
+                .header("Location", Matchers.endsWith("/review?restaurant_id=$restId"))
                     .body("restaurantId", Matchers.equalTo(restId.toString()),
                             "average", Matchers.equalTo(2.3f),
                             "qtdReview", Matchers.equalTo(25))
