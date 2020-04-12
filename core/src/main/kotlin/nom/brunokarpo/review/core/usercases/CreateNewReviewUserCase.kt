@@ -12,7 +12,7 @@ class CreateNewReviewUserCase(
 
     fun execute(review: Review): ReviewSummary {
         reviewRepository.create(review)
-        return reviewSummaryRepository.getByRestaurantId(review.restaurantId)!!
+        return reviewSummaryRepository.getByRestaurantId(review.restaurantId).get()
     }
 
 }
