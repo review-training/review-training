@@ -1,6 +1,5 @@
 package nom.brunokarpo.review.app.resources
 
-import io.restassured.RestAssured
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers
@@ -8,6 +7,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.context.jdbc.SqlGroup
+import java.util.*
 
 @SqlGroup(
         Sql(value = ["/load-database.sql"], executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
@@ -21,8 +21,9 @@ class ReviewSummaryResourceTest: ReviewApplicationTest() {
             .request()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
+                .param("restaurant_id", UUID.fromString("cc2c3338-efe2-42f1-b424-76fb0ac2f624"))
             .`when`()
-                .get("/review/cc2c3338-efe2-42f1-b424-76fb0ac2f624")
+                .get("/review")
             .then()
                 .log().headers()
                 .log().body()
