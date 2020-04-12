@@ -15,5 +15,5 @@ run-locally: _build
 docker-build-image: _build
 	docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest app/.
 
-docker-run: docker-build-image
+docker-run: _build
 	docker-compose up --build -d
