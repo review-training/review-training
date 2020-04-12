@@ -9,7 +9,7 @@ class RetrieveSummaryReviewByRestaurantIdUseCase(
 ) {
 
     fun execute(restaurantId: UUID): ReviewSummary {
-        return reviewSummaryRepository.getByRestaurantId(restaurantId).get()
+        return reviewSummaryRepository.getByRestaurantId(restaurantId)!!
     }
 
 }
