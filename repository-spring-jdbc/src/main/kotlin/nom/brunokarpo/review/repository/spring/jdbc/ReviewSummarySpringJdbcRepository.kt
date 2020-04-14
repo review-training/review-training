@@ -47,13 +47,7 @@ class ReviewSummarySpringJdbcRepository(
 
         val result = jdbcTemplate.query(sql, params, ReviewSummaryRowMapper())
 
-        return Pageable(size = size,
-                page =  page,
-                first = page == 0,
-                last = size * (page + 1) >= count,
-                numberOfElements = count,
-                totalPages = ceil(count.toDouble() / size).toInt(),
-                content = result)
+        return Pageable(size = size, page =  page, count = count, content = result)
     }
 
 }
