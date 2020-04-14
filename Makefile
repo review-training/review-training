@@ -12,7 +12,18 @@ _build: _clean
 build: _clean
 	./mvnw install
 
-run-locally: _build
+_infra-provide: _infra-stop
+	docker run --rm --name=review-database\
+    	 -e POSTGRES_DB=review\
+    	 -e POSTGRES_USER=review-app\
+    	 -e POSTGRES_PASSWORD=review-app\
+    	 -p 5432:5432\
+    	 -d postgres:9.6-alpine
+
+_infra-stop:
+	docker container stop review-database || echo "No infra provided"
+
+run-locally: _build _infra-provide
 	./mvnw -f app spring-boot:run
 
 docker-build-image: _build
