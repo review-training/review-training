@@ -44,7 +44,7 @@ class ReviewSummaryResourceTest: ReviewApplicationTest() {
                 .param("page", 0)
                 .param("size", 5)
             .`when`()
-                .get("/review:list")
+                .get("/review/list")
             .then()
                 .log().headers()
                 .log().body()

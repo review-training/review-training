@@ -15,7 +15,7 @@ interface ReviewSummaryResources {
     fun retrieveSummaryByRestaurantId(@RequestParam("restaurant_id") restaurantId: UUID)
             : ResponseEntity<ReviewSummaryDTOResource>
 
-    @GetMapping(":list")
+    @GetMapping("/list")
     @ResponseStatus(HttpStatus.OK)
     fun retrieveSummaryList(@RequestParam("size") size: Int = 10, @RequestParam("page") page: Int = 0)
             : PageDTOResource<ReviewSummaryDTOResource>
