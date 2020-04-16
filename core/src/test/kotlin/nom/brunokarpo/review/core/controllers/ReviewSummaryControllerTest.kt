@@ -1,12 +1,16 @@
 package nom.brunokarpo.review.core.controllers
 
+import io.mockk.called
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
+import io.mockk.verify
 import nom.brunokarpo.review.core.controllers.dtos.ReviewSummaryDTO
+import nom.brunokarpo.review.core.model.Pageable
 import nom.brunokarpo.review.core.model.ReviewSummary
 import nom.brunokarpo.review.core.usercases.RetrieveSummaryReviewByRestaurantIdUseCase
+import nom.brunokarpo.review.core.usercases.RetrieveSummaryReviewListPaginatedUseCase
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import java.math.BigDecimal
@@ -27,6 +31,9 @@ class ReviewSummaryControllerTest {
     @MockK
     private lateinit var retrieveSummaryReviewByRestaurantIdUseCase: RetrieveSummaryReviewByRestaurantIdUseCase
 
+    @MockK
+    private lateinit var retrieveSummaryReviewListPaginatedUseCase: RetrieveSummaryReviewListPaginatedUseCase
+
     @InjectMockKs
     private lateinit var sut: ReviewSummaryController
 
@@ -42,5 +49,19 @@ class ReviewSummaryControllerTest {
         assertEquals(RESTAURANT_ID, result.restaurantId)
         assertEquals(AVERAGE, result.average)
         assertEquals(QTD_REVIEW, result.qtdReview)
+    }
+
+    @Test
+    internal fun `should retrieve summary review list paginated`() {
+        every {
+            retrieveSummaryReviewListPaginatedUseCase.execute(any(), any())
+        } returns Pageable()
+
+        sut.retrieveList(0, 0)
+
+        verify(exactly = 1) {
+            retrieveSummaryReviewListPaginatedUseCase.execute(any(), any())
+        }
+
     }
 }
