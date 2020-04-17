@@ -1,7 +1,12 @@
 package nom.brunokarpo.review.core.controllers.dtos
 
+import io.mockk.every
+import io.mockk.mockk
+import nom.brunokarpo.review.core.controllers.dtos.converters.ModelDTOConverter
+import nom.brunokarpo.review.core.controllers.dtos.converters.ReviewSummaryToReviewSummaryDTO
 import nom.brunokarpo.review.core.model.Pageable
 import nom.brunokarpo.review.core.model.ReviewSummary
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 import java.util.*
@@ -18,11 +23,19 @@ internal class PageableDTOTest {
         const val TOTAL_PAGES = 5
     }
 
+    private lateinit var mockConverter: ModelDTOConverter<Any, Any>
+
+    @BeforeEach
+    internal fun setUp() {
+        mockConverter = mockk()
+        every { mockConverter.convert(any()) } returns Any()
+    }
+
     @Test
     internal fun `should convert to DTO with size`() {
         val pageable = createPageableDTO(emptyList())
 
-        val result = PageableDTO<Any, Any>(pageable)
+        val result = PageableDTO(pageable, mockConverter)
 
         assertEquals(SIZE, result.size)
     }
@@ -31,7 +44,7 @@ internal class PageableDTOTest {
     internal fun `should convert to DTO with page`() {
         val pageable = createPageableDTO(emptyList())
 
-        val result = PageableDTO<Any, Any>(pageable)
+        val result = PageableDTO(pageable, mockConverter)
 
         assertEquals(PAGE, result.page)
     }
@@ -40,7 +53,7 @@ internal class PageableDTOTest {
     internal fun `should convert to DTO with first parameter`() {
         val pageable = createPageableDTO(emptyList())
 
-        val result = PageableDTO<Any, Any>(pageable)
+        val result = PageableDTO(pageable, mockConverter)
 
         assertEquals(FIRST, result.first)
     }
@@ -49,7 +62,7 @@ internal class PageableDTOTest {
     internal fun `should convert to DTO with last parameter`() {
         val pageable = createPageableDTO(emptyList())
 
-        val result = PageableDTO<Any, Any>(pageable)
+        val result = PageableDTO(pageable, mockConverter)
 
         assertEquals(LAST, result.last)
     }
@@ -58,7 +71,7 @@ internal class PageableDTOTest {
     internal fun `should convert to DTO with number of elements`() {
         val pageable = createPageableDTO(listOf(Any(), Any(), Any()))
 
-        val result = PageableDTO<Any, Any>(pageable)
+        val result = PageableDTO(pageable, mockConverter)
 
         assertEquals(3, result.numberOfElements)
     }
@@ -67,7 +80,7 @@ internal class PageableDTOTest {
     internal fun `should convert to DTO with total of pages`() {
         val pageable = createPageableDTO(emptyList())
 
-        val result = PageableDTO<Any, Any>(pageable)
+        val result = PageableDTO(pageable, mockConverter)
 
         assertEquals(TOTAL_PAGES, result.totalPages)
     }
@@ -81,7 +94,7 @@ internal class PageableDTOTest {
 
         val pageable = createReviewSummaryPageable(listOf(reviewSummary))
 
-        val result = PageableDTO<ReviewSummaryDTO, ReviewSummary>(pageable)
+        val result = PageableDTO<ReviewSummaryDTO, ReviewSummary>(pageable, ReviewSummaryToReviewSummaryDTO())
 
         result.content[0].apply {
             assertEquals(restaurantId, this.restaurantId)

@@ -1,6 +1,5 @@
 package nom.brunokarpo.review.core.controllers
 
-import io.mockk.called
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK

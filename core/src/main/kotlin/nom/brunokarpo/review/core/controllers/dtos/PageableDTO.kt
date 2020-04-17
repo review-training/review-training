@@ -1,5 +1,6 @@
 package nom.brunokarpo.review.core.controllers.dtos
 
+import nom.brunokarpo.review.core.controllers.dtos.converters.ModelDTOConverter
 import nom.brunokarpo.review.core.model.Pageable
 
 data class PageableDTO<DTO, MODEL>(
@@ -12,8 +13,9 @@ data class PageableDTO<DTO, MODEL>(
         var content: List<DTO> = emptyList()
 ) {
 
-    constructor(pageable: Pageable<MODEL>)
+    constructor(pageable: Pageable<MODEL>, converter: ModelDTOConverter<DTO, MODEL>)
             : this(size = pageable.size, page = pageable.page, first = pageable.first, last = pageable.last,
-                    numberOfElements = pageable.numberOfElements, totalPages = pageable.totalPages)
+                    numberOfElements = pageable.numberOfElements, totalPages = pageable.totalPages,
+                    content = pageable.content.map { model -> converter.convert(model) })
 
 }
