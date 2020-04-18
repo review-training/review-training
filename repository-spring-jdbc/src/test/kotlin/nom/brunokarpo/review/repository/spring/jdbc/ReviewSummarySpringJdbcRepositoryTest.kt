@@ -46,7 +46,8 @@ class ReviewSummarySpringJdbcRepositoryTest: DatabaseTestBase() {
         assertThat(result.size).isEqualTo(5)
         assertThat(result.first).isTrue()
         assertThat(result.last).isFalse()
-        assertThat(result.numberOfElements).isEqualTo(14)
+        assertThat(result.numberOfElements).isEqualTo(5)
+        assertThat(result.totalElements).isEqualTo(14)
         assertThat(result.totalPages).isEqualTo(3)
 
         assertThat(result.content[0].restaurantId).isEqualTo(UUID.fromString("811bfc9f-4ac6-496c-ac1a-566de4974bd0"))
