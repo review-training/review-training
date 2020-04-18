@@ -17,6 +17,7 @@ interface ReviewSummaryResources {
 
     @GetMapping("/list")
     @ResponseStatus(HttpStatus.OK)
-    fun retrieveSummaryList(@RequestParam("size") size: Int = 10, @RequestParam("page") page: Int = 0)
+    fun retrieveSummaryList(@RequestParam("size", required = false) size: Int?,
+                            @RequestParam("page", required = false) page: Int?)
             : PageDTOResource<ReviewSummaryDTOResource>
 }

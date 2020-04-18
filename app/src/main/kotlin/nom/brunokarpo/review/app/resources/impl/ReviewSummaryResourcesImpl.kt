@@ -22,8 +22,8 @@ class ReviewSummaryResourcesImpl(
             = ResponseEntity.ok(ReviewSummaryDTOResource(reviewSummaryController.retrieveByRestaurantId(restaurantId)))
 
 
-    override fun retrieveSummaryList(size: Int, page: Int) =
-        PageDTOResource(reviewSummaryController.retrieveList(size, page)) {
+    override fun retrieveSummaryList(size: Int?, page: Int?) =
+        PageDTOResource(reviewSummaryController.retrieveList(size ?: 10, page ?: 0)) {
             it.map {  element -> ReviewSummaryDTOToReviewSummaryDTOResourceConverter().convert(element as ReviewSummaryDTO) }
         }
 }
