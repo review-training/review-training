@@ -36,6 +36,7 @@
     <module>database-migrations</module>
     <module>repository-spring-jdbc</module>
       <module>messaging-gateway</module>
+    <module>messaging-spring-jms</module>
   </modules>
 
   <dependencyManagement>
@@ -82,6 +83,18 @@
       <dependency>
         <groupId>nom.brunokarpo.review</groupId>
         <artifactId>database-migrations</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nom.brunokarpo.review</groupId>
+        <artifactId>messaging-gateway</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>nom.brunokarpo.review</groupId>
+        <artifactId>messaging-spring-jms</artifactId>
         <version>${project.version}</version>
       </dependency>
 
