@@ -14,11 +14,14 @@
 
     <name>Review - Database Migrations</name>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>6.3.2</version>
         </dependency>
     </dependencies>
 
