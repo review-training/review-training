@@ -17,9 +17,10 @@ class ReviewSummaryController(
         return ReviewSummaryDTO(retrieveSummaryReviewByRestaurantIdUseCase.execute(restaurantId))
     }
 
-    fun retrieveList(size: Int, page: Int): PageableDTO<ReviewSummaryDTO, ReviewSummary> {
-        return PageableDTO(retrieveSummaryReviewListPaginatedUseCase.execute(size = size, page = page),
-                ReviewSummaryToReviewSummaryDTO())
+    fun retrieveList(size: Int, page: Int): PageableDTO<ReviewSummaryDTO> {
+        return PageableDTO(retrieveSummaryReviewListPaginatedUseCase.execute(size = size, page = page)) {
+            it.map { element -> ReviewSummaryToReviewSummaryDTO().convert(element as ReviewSummary) }
+        }
     }
 
 }

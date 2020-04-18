@@ -4,6 +4,7 @@ import nom.brunokarpo.review.core.repository.ReviewRepository
 import nom.brunokarpo.review.core.repository.ReviewSummaryRepository
 import nom.brunokarpo.review.core.usercases.CreateNewReviewUserCase
 import nom.brunokarpo.review.core.usercases.RetrieveSummaryReviewByRestaurantIdUseCase
+import nom.brunokarpo.review.core.usercases.RetrieveSummaryReviewListPaginatedUseCase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -18,5 +19,9 @@ class UseCasesConfiguration {
     @Bean
     fun retrieveSummaryReviewByRestaurantIdUseCase(reviewSummaryRepository: ReviewSummaryRepository)
             = RetrieveSummaryReviewByRestaurantIdUseCase(reviewSummaryRepository)
+
+    @Bean
+    fun retrieveSummaryReviewListPaginatedUseCase(reviewSummaryRepository: ReviewSummaryRepository)
+            = RetrieveSummaryReviewListPaginatedUseCase(reviewSummaryRepository)
 
 }
