@@ -15,6 +15,6 @@ class ReviewResourcesImpl(
 
     override fun createReview(dto: ReviewDTOResource): ResponseEntity<ReviewSummaryDTOResource> {
         val result = ReviewSummaryDTOResource(reviewsController.createNew(dto.toModel()))
-        return ResponseEntity.created(URI("/review/${result.restaurantId}")).body(result)
+        return ResponseEntity.created(URI("/review?restaurant_id=${result.restaurantId}")).body(result)
     }
 }
