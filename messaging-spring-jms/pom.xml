@@ -4,15 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>nom.brunokarpo.review</groupId>
         <artifactId>root</artifactId>
+        <groupId>nom.brunokarpo.review</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>repository-spring-jdbc</artifactId>
+    <artifactId>messaging-spring-jms</artifactId>
     <packaging>jar</packaging>
 
-    <name>Review - Repository Spring JDBC</name>
+    <name>Review - Messaging Spring JMS</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,26 +23,22 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>nom.brunokarpo.review</groupId>
-            <artifactId>repository-gateway</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>nom.brunokarpo.review</groupId>
-            <artifactId>database-migrations</artifactId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test-junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>nom.brunokarpo.review</groupId>
+            <artifactId>messaging-gateway</artifactId>
         </dependency>
 
         <dependency>
@@ -56,10 +52,15 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.ninja-squad</groupId>
+            <artifactId>springmockk</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>postgresql</artifactId>
+            <artifactId>testcontainers</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
