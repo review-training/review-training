@@ -10,6 +10,24 @@ services:
     ports:
     - 5432:5432
 
+  activemq:
+    image: webcenter/activemq:latest
+    restart: always
+    environment:
+      ACTIVEMQ_CONFIG_NAME: amqp-srv1
+      ACTIVEMQ_CONFIG_DEFAULTACCOUNT: "false"
+      ACTIVEMQ_ADMIN_LOGIN: admin
+      ACTIVEMQ_ADMIN_PASSWORD: admin
+      ACTIVEMQ_CONFIG_MINMEMORY: 256
+      ACTIVEMQ_CONFIG_MAXMEMORY: 1024
+    ports:
+    - 8161:8161
+    - 61616:61616
+    - 61613:61613
+    volumes:
+    - /data/activemq:/data
+    - /var/log/activemq:/var/log/activemq
+
   app:
     build:
       context: app/
@@ -19,8 +37,12 @@ services:
       DATABASE_URL: "jdbc:postgresql://database:5432/review"
       DATABASE_USERNAME: review-app
       DATABASE_PASSWORD: review-app
+      ACTIVEMQ_URL: "tcp://activemq:61616"
+      ACTIVEMQ_USER: admin
+      ACTIVEMQ_PASSWORD: admin
     ports:
     - 8080:8080
     - 8081:8081
     depends_on:
       - database
+      - activemq
