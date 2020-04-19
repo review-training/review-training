@@ -1,5 +1,7 @@
 package nom.brunokarpo.review.messaging.spring.jms
 
+import com.ninjasquad.springmockk.MockkBean
+import nom.brunokarpo.review.messaging.consumers.ReviewMessageConsumer
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -22,6 +24,9 @@ abstract class MessagingTestBase {
 
     @Autowired
     lateinit var jmsTemplate: JmsTemplate
+
+    @MockkBean
+    lateinit var reviewMessageConsumer: ReviewMessageConsumer
 
     companion object {
         private val ACTIVEMQ_CONTAINER = KGenericContainer("webcenter/activemq")
