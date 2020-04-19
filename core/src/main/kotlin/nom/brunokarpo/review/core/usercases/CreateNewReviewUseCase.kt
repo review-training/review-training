@@ -6,7 +6,7 @@ import nom.brunokarpo.review.core.model.ReviewSummary
 import nom.brunokarpo.review.core.repository.ReviewRepository
 import nom.brunokarpo.review.core.repository.ReviewSummaryRepository
 
-class CreateNewReviewUserCase(
+class CreateNewReviewUseCase(
         private val reviewRepository: ReviewRepository,
         private val reviewSummaryRepository: ReviewSummaryRepository,
         private val reviewSummaryPublisher: ReviewSummaryPublisher

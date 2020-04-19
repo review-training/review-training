@@ -20,7 +20,7 @@ import java.util.*
 import kotlin.test.assertEquals
 
 @ExtendWith(MockKExtension::class)
-class CreateNewReviewUserCaseTest {
+class CreateNewReviewUseCaseTest {
 
     private companion object {
         val RESTAURANT_ID = UUID.randomUUID()!!
@@ -41,7 +41,7 @@ class CreateNewReviewUserCaseTest {
     private lateinit var reviewSummaryRepository: ReviewSummaryRepository
 
     @InjectMockKs
-    private lateinit var sut: CreateNewReviewUserCase
+    private lateinit var sut: CreateNewReviewUseCase
 
     private lateinit var review: Review
     private lateinit var reviewSummary: ReviewSummary

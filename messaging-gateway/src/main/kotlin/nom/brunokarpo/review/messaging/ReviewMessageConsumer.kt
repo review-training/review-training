@@ -1,14 +1,14 @@
 package nom.brunokarpo.review.messaging
 
-import nom.brunokarpo.review.core.usercases.CreateNewReviewUserCase
+import nom.brunokarpo.review.core.usercases.CreateNewReviewUseCase
 import nom.brunokarpo.review.messaging.messages.ReviewMessage
 
 class ReviewMessageConsumer(
-        private val createNewReviewUserCase: CreateNewReviewUserCase
+        private val createNewReviewUseCase: CreateNewReviewUseCase
 ) {
 
     fun process(message: ReviewMessage) {
-        createNewReviewUserCase.execute(message.toModel())
+        createNewReviewUseCase.execute(message.toModel())
     }
 
 }
