@@ -27,6 +27,7 @@
     <flyway-core.version>6.3.2</flyway-core.version>
     <jackson-module-kotlin.version>2.10.1</jackson-module-kotlin.version>
     <postgresql.version>42.2.12</postgresql.version>
+    <springmockk.version>2.0.1</springmockk.version>
   </properties>
 
   <modules>
@@ -140,6 +141,13 @@
             <artifactId>junit</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>com.ninja-squad</groupId>
+        <artifactId>springmockk</artifactId>
+        <version>${springmockk.version}</version>
+        <scope>test</scope>
       </dependency>
 
       <!-- Testcontainers dependencies -->
