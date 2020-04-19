@@ -43,6 +43,10 @@
             <groupId>nom.brunokarpo.review</groupId>
             <artifactId>repository-spring-jdbc</artifactId>
         </dependency>
+        <dependency>
+            <groupId>nom.brunokarpo.review</groupId>
+            <artifactId>messaging-spring-jms</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
