@@ -16,10 +16,8 @@ class ReviewAMQMessageConverter(
     override fun toMessage(reviewMessage: Any, session: Session): Message {
         val reviewAMQMessage = if (reviewMessage is ReviewAMQMessage) {
             reviewMessage
-        } else if (reviewMessage is String) {
-            objectMapper.readValue(reviewMessage, ReviewAMQMessage::class.java)
         } else {
-            ReviewAMQMessage()
+            objectMapper.readValue(reviewMessage as String, ReviewAMQMessage::class.java)
         }
         val payload: String = objectMapper.writeValueAsString(reviewAMQMessage)
         val textMessage = session.createTextMessage()
@@ -31,10 +29,6 @@ class ReviewAMQMessageConverter(
         val textMessage = message as TextMessage
         val payload = textMessage.text
 
-        return try {
-            objectMapper.readValue(payload, ReviewAMQMessage::class.java)
-        } catch (e: Exception) {
-            ReviewAMQMessage()
-        }
+        return objectMapper.readValue(payload, ReviewAMQMessage::class.java)
     }
 }
