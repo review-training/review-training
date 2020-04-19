@@ -7,6 +7,7 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
 import io.mockk.just
 import io.mockk.verifyAll
+import nom.brunokarpo.review.core.messaging.ReviewSummaryPublisher
 import nom.brunokarpo.review.core.model.Review
 import nom.brunokarpo.review.core.model.ReviewSummary
 import nom.brunokarpo.review.core.repository.ReviewRepository
@@ -31,6 +32,9 @@ class CreateNewReviewUserCaseTest {
     }
 
     @MockK
+    private lateinit var reviewSummaryPublisher: ReviewSummaryPublisher
+
+    @MockK
     private lateinit var reviewRepository: ReviewRepository
 
     @MockK
@@ -47,6 +51,7 @@ class CreateNewReviewUserCaseTest {
         review = Review(restaurantId = RESTAURANT_ID, userId = USER_ID, orderId = ORDER_ID, review = REVIEW)
         reviewSummary = ReviewSummary(restaurantId = RESTAURANT_ID, qtdReview = REVIEW_QTD, average = AVERAGE)
         every { reviewRepository.create(any()) } just Runs
+        every { reviewSummaryPublisher.publish(any()) } just Runs
         every { reviewSummaryRepository.getByRestaurantId(RESTAURANT_ID) } returns reviewSummary
 
     }
@@ -63,5 +68,12 @@ class CreateNewReviewUserCaseTest {
         val result = sut.execute(review)
 
         assertEquals(reviewSummary, result)
+    }
+
+    @Test
+    internal fun `should publish review summary after create a review`() {
+        val result = sut.execute(review)
+
+        verifyAll { reviewSummaryPublisher.publish(result) }
     }
 }
