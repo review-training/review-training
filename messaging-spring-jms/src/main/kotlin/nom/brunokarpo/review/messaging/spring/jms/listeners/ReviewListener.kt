@@ -1,6 +1,6 @@
 package nom.brunokarpo.review.messaging.spring.jms.listeners
 
-import nom.brunokarpo.review.messaging.ReviewMessageConsumer
+import nom.brunokarpo.review.messaging.consumers.ReviewMessageConsumer
 import nom.brunokarpo.review.messaging.spring.jms.messages.ReviewAMQMessage
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

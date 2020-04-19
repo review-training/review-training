@@ -2,8 +2,8 @@ package nom.brunokarpo.review.messaging.spring.jms.listeners
 
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.*
-import nom.brunokarpo.review.messaging.ReviewMessageConsumer
-import nom.brunokarpo.review.messaging.messages.ReviewMessage
+import nom.brunokarpo.review.messaging.consumers.ReviewMessageConsumer
+import nom.brunokarpo.review.messaging.consumers.messages.ReviewMessage
 import nom.brunokarpo.review.messaging.spring.jms.MessagingTestBase
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

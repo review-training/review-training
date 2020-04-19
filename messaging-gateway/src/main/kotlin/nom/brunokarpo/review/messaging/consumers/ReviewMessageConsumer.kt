@@ -1,7 +1,7 @@
-package nom.brunokarpo.review.messaging
+package nom.brunokarpo.review.messaging.consumers
 
 import nom.brunokarpo.review.core.usercases.CreateNewReviewUseCase
-import nom.brunokarpo.review.messaging.messages.ReviewMessage
+import nom.brunokarpo.review.messaging.consumers.messages.ReviewMessage
 
 class ReviewMessageConsumer(
         private val createNewReviewUseCase: CreateNewReviewUseCase

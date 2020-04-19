@@ -1,6 +1,6 @@
 package nom.brunokarpo.review.messaging.spring.jms.messages
 
-import nom.brunokarpo.review.messaging.messages.ReviewMessage
+import nom.brunokarpo.review.messaging.consumers.messages.ReviewMessage
 import java.util.*
 
 data class ReviewAMQMessage(

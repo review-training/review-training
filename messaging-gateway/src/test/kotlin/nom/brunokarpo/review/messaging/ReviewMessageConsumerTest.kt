@@ -10,7 +10,8 @@ import io.mockk.verify
 import nom.brunokarpo.review.core.model.Review
 import nom.brunokarpo.review.core.model.ReviewSummary
 import nom.brunokarpo.review.core.usercases.CreateNewReviewUseCase
-import nom.brunokarpo.review.messaging.messages.ReviewMessage
+import nom.brunokarpo.review.messaging.consumers.ReviewMessageConsumer
+import nom.brunokarpo.review.messaging.consumers.messages.ReviewMessage
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
