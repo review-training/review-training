@@ -14,7 +14,13 @@ class ReviewAMQMessageConverter(
 ): MessageConverter {
 
     override fun toMessage(reviewMessage: Any, session: Session): Message {
-        val reviewAMQMessage = reviewMessage as ReviewAMQMessage
+        val reviewAMQMessage = if (reviewMessage is ReviewAMQMessage) {
+            reviewMessage
+        } else if (reviewMessage is String) {
+            objectMapper.readValue(reviewMessage, ReviewAMQMessage::class.java)
+        } else {
+            ReviewAMQMessage()
+        }
         val payload: String = objectMapper.writeValueAsString(reviewAMQMessage)
         val textMessage = session.createTextMessage()
         textMessage.text = payload
