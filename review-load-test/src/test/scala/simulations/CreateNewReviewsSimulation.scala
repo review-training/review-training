@@ -3,13 +3,13 @@ package simulations
 import java.util.UUID
 
 import io.gatling.core.Predef._
+import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._
 import simulations.utils.RestaurantIdGenerator
 
-import scala.concurrent.duration.DurationInt
 import scala.util.Random
 
-class CreateNewReviewsSimulation extends GenericSimulation {
+class CreateNewReviewsSimulation {
 
   private val rnd = new Random()
   private val restaurantIdGenerator = new RestaurantIdGenerator()
@@ -22,30 +22,18 @@ class CreateNewReviewsSimulation extends GenericSimulation {
     restaurantIdGenerator.getRandomRestaurantId()
   }
 
-  val customFeeder: Iterator[Map[String, Any]] = Iterator.continually(Map(
+  private val customFeeder: Iterator[Map[String, Any]] = Iterator.continually(Map(
     "restaurantId" -> getRandomRestaurantId,
     "orderId" -> getRandomUUID,
     "userId" -> getRandomUUID,
     "review" -> rnd.nextInt(5)
   ))
 
-  private def createNewReview() = {
+  def createNewReview: ChainBuilder = {
     feed(customFeeder).
       exec(http("Create new Review")
         .post("review")
         .body(ElFileBody("bodies/NewReviewTemplate.json")).asJson
         .check(status.is(201)))
   }
-
-  private val scn = scenario("Creating reviews")
-    .forever() {
-      exec(createNewReview())
-    }
-
-  setUp(
-    scn.inject(
-      rampUsers(userCount) during (rampDuration seconds)
-    ).protocols(httpConf.inferHtmlResources())
-  ).maxDuration(testDuration seconds)
-
 }

@@ -18,4 +18,16 @@ abstract class GenericSimulation extends Simulation {
       .getOrElse(defaultValue)
   }
 
+  /*** Before ***/
+  before {
+    println(s"Running test with ${userCount} users")
+    println(s"Ramping users over ${rampDuration} seconds")
+    println(s"Total Test duration: ${testDuration} seconds")
+  }
+
+  /*** After ***/
+  after {
+    println("Stress test completed")
+  }
+
 }
