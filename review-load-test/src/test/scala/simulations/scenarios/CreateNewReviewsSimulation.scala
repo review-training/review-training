@@ -22,11 +22,15 @@ class CreateNewReviewsSimulation {
     restaurantIdGenerator.getRandomRestaurantId()
   }
 
+  private def getReview: Int = {
+    rnd.nextInt(5) + 1
+  }
+
   private val customFeeder: Iterator[Map[String, Any]] = Iterator.continually(Map(
     "restaurantId" -> getRandomRestaurantId,
     "orderId" -> getRandomUUID,
     "userId" -> getRandomUUID,
-    "review" -> rnd.nextInt(5)
+    "review" -> getReview
   ))
 
   def createNewReview: ChainBuilder = {
