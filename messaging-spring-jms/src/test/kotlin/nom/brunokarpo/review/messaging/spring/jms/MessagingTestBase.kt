@@ -38,10 +38,10 @@ abstract class MessagingTestBase {
             ACTIVEMQ_CONTAINER.start()
 
             TestPropertyValues.of(
-                    "spring.activemq.broker-url=tcp://${ACTIVEMQ_CONTAINER.containerIpAddress}:61616",
+                    "spring.activemq.broker-url=tcp://${ACTIVEMQ_CONTAINER.containerIpAddress}:${ACTIVEMQ_CONTAINER.getMappedPort(61616)}",
                     "spring.activemq.user=",
                     "spring.activemq.password="
-            )
+            ).applyTo(configurableApplicationContext.environment)
         }
     }
 }
