@@ -1,4 +1,4 @@
-package simulations
+package simulations.scenarios
 
 import java.util.UUID
 
