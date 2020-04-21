@@ -16,7 +16,7 @@ internal class ReviewSummaryPublisherImplTest: MessagingTestBase() {
     companion object {
         val RESTAURANT_ID = UUID.randomUUID()!!
         val AVERAGE = BigDecimal.valueOf(Random.nextDouble())!!
-        val QTD_REVIEW = Random.nextInt()!!
+        val QTD_REVIEW = Random.nextInt()
     }
 
     @Autowired
