@@ -51,3 +51,6 @@ docker-build-image: _build
 
 docker-run: _build
 	docker-compose up --build -d
+
+load-test: docker-run
+	./mvnw -f review-load-test gatling:test -Dgatling.simulationClass=simulations.SimulationExecution -DUSERS=120 -DRAMP_DURATION=120 -DDURATION=360
