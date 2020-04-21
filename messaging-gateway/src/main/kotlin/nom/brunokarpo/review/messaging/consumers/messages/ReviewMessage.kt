@@ -1,4 +1,4 @@
-package nom.brunokarpo.review.messaging.messages
+package nom.brunokarpo.review.messaging.consumers.messages
 
 import nom.brunokarpo.review.core.model.Review
 import java.util.*

@@ -33,7 +33,7 @@ class ReviewSummarySpringJdbcRepository(
         val fromWhereQuery = " from review_summary "
         var sql = countQuery + fromWhereQuery
 
-        val count = jdbcTemplate.queryForObject(countQuery + fromWhereQuery, mapOf<String, Any>(), Int::class.java)
+        val count = jdbcTemplate.queryForObject(sql, mapOf<String, Any>(), Int::class.java)
         if (count == null || count == 0) {
             return Pageable(size = size, page = page)
         }

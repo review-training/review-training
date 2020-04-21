@@ -12,6 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.PostgreSQLContainerProvider
 
 
@@ -27,16 +28,23 @@ abstract class ReviewApplicationTest {
                 .withDatabaseName("review")
                 .withUsername("review-app")
                 .withPassword("review-app")
+
+        private val ACTIVEMQ_CONTAINER = KGenericContainer("webcenter/activemq")
+                .withExposedPorts(61616)
     }
 
     internal class Initializer : ApplicationContextInitializer<ConfigurableApplicationContext> {
         override fun initialize(configurableApplicationContext: ConfigurableApplicationContext) {
             POSTGRES_CONTAINER.start()
+            ACTIVEMQ_CONTAINER.start()
 
             TestPropertyValues.of(
                     "spring.datasource.url=${POSTGRES_CONTAINER.getJdbcUrl()}",
                     "spring.datasource.username=${POSTGRES_CONTAINER.getUsername()}",
-                    "spring.datasource.password=${POSTGRES_CONTAINER.getPassword()}"
+                    "spring.datasource.password=${POSTGRES_CONTAINER.getPassword()}",
+                    "spring.activemq.broker-url=tcp://${ACTIVEMQ_CONTAINER.containerIpAddress}:${ACTIVEMQ_CONTAINER.getMappedPort(61616)}",
+                    "spring.activemq.user=",
+                    "spring.activemq.password="
             ).applyTo(configurableApplicationContext.environment)
         }
     }
@@ -50,3 +58,5 @@ abstract class ReviewApplicationTest {
         RestAssured.basePath = "/review"
     }
 }
+
+class KGenericContainer(imageName: String) : GenericContainer<KGenericContainer>(imageName)

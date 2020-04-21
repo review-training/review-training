@@ -10,7 +10,7 @@ import nom.brunokarpo.review.core.controllers.dtos.ReviewDTO
 import nom.brunokarpo.review.core.controllers.dtos.ReviewSummaryDTO
 import nom.brunokarpo.review.core.model.Review
 import nom.brunokarpo.review.core.model.ReviewSummary
-import nom.brunokarpo.review.core.usercases.CreateNewReviewUserCase
+import nom.brunokarpo.review.core.usercases.CreateNewReviewUseCase
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -31,7 +31,7 @@ class ReviewsControllerTest {
     }
 
     @MockK
-    private lateinit var createNewReviewUserCaseMock: CreateNewReviewUserCase
+    private lateinit var createNewReviewUseCaseMock: CreateNewReviewUseCase
 
     @InjectMockKs
     private lateinit var sut: ReviewsController
@@ -42,7 +42,7 @@ class ReviewsControllerTest {
     internal fun setUp() {
         reviewDto = ReviewDTO(restaurantId = REST_ID, userId = USER_ID, orderId = ORDER_ID, review = REVIEW)
         every {
-            createNewReviewUserCaseMock.execute(any())
+            createNewReviewUseCaseMock.execute(any())
         } returns ReviewSummary(restaurantId = REST_ID, qtdReview = QTD_REVIEW, average = AVERAGE)
     }
 
@@ -50,7 +50,7 @@ class ReviewsControllerTest {
     internal fun `should receive new review and send to property user case`() {
         sut.createNew(reviewDto)
 
-        verify { createNewReviewUserCaseMock.execute(any()) }
+        verify { createNewReviewUseCaseMock.execute(any()) }
     }
 
     @Test
@@ -58,7 +58,7 @@ class ReviewsControllerTest {
         val slot = slot<Review>()
 
         every {
-            createNewReviewUserCaseMock.execute(capture(slot))
+            createNewReviewUseCaseMock.execute(capture(slot))
         } returns ReviewSummary(restaurantId = REST_ID, qtdReview = QTD_REVIEW, average = AVERAGE)
 
         sut.createNew(reviewDto)

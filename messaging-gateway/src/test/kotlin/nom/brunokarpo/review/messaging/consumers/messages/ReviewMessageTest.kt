@@ -1,4 +1,4 @@
-package nom.brunokarpo.review.messaging.messages
+package nom.brunokarpo.review.messaging.consumers.messages
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
