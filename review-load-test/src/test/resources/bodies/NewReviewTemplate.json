@@ -1,0 +1,6 @@
+{
+  "restaurantId": "${restaurantId}",
+  "userId": "${userId}",
+  "orderId": "${orderId}",
+  "review": ${review}
+}
