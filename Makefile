@@ -53,4 +53,4 @@ docker-run: _build
 	docker-compose up --build -d
 
 load-test: docker-run
-	./mvnw -f review-load-test gatling:test
+	./mvnw -f review-load-test clean gatling:test -DUSERS=30 -DRAMP_DURATION=60 -DDURATION=120

@@ -4,32 +4,32 @@ import java.util.UUID
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
-import simulations.utils.{RestaurantIdGenerator}
+import simulations.utils.RestaurantIdGenerator
 
 import scala.concurrent.duration.DurationInt
 import scala.util.Random
 
 class CreateNewReviewsSimulation extends GenericSimulation {
 
-  private var rnd = new Random()
+  private val rnd = new Random()
   private val restaurantIdGenerator = new RestaurantIdGenerator()
 
-  private def getRandomUUID(): UUID = {
+  private def getRandomUUID: UUID = {
     UUID.randomUUID()
   }
 
-  private def getRandomRestaurantId(): UUID = {
+  private def getRandomRestaurantId: UUID = {
     restaurantIdGenerator.getRandomRestaurantId()
   }
 
-  val customFeeder = Iterator.continually(Map(
-    "restaurantId" -> getRandomRestaurantId(),
-    "orderId" -> getRandomUUID(),
-    "userId" -> getRandomUUID(),
+  val customFeeder: Iterator[Map[String, Any]] = Iterator.continually(Map(
+    "restaurantId" -> getRandomRestaurantId,
+    "orderId" -> getRandomUUID,
+    "userId" -> getRandomUUID,
     "review" -> rnd.nextInt(5)
   ))
 
-  def createNewReview() = {
+  private def createNewReview() = {
     feed(customFeeder).
       exec(http("Create new Review")
         .post("review")
@@ -37,16 +37,15 @@ class CreateNewReviewsSimulation extends GenericSimulation {
         .check(status.is(201)))
   }
 
-  val scn = scenario("Creating reviews")
+  private val scn = scenario("Creating reviews")
     .forever() {
       exec(createNewReview())
-        .pause(500.milliseconds)
     }
 
   setUp(
     scn.inject(
-      atOnceUsers(1)
+      rampUsers(userCount) during (rampDuration seconds)
     ).protocols(httpConf.inferHtmlResources())
-  ).maxDuration(10 seconds)
+  ).maxDuration(testDuration seconds)
 
 }
