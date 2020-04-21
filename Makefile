@@ -51,3 +51,6 @@ docker-build-image: _build
 
 docker-run: _build
 	docker-compose up --build -d
+
+load-test: docker-run
+	./mvnw -f review-load-test gatling:test
