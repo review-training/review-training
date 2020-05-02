@@ -2,7 +2,7 @@
 Module created to training some developments skills. The app calculate the average review of restaurants.
 
 ## Quality
-[![Build Status](https://travis-ci.com/brunokarpo/review-training.svg?branch=master)](https://travis-ci.com/brunokarpo/review-training)
+[![Build Status](https://travis-ci.com/review-training/review-training.svg?branch=master)](https://travis-ci.com/review-training/review-training)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=brunokarpo_review-training&metric=alert_status)](https://sonarcloud.io/dashboard?id=brunokarpo_review-training)
 
 ## Building project
