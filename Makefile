@@ -44,10 +44,10 @@ _infra-stop:
 	docker container stop review-activemq || echo "No infra provided"
 
 run-locally: _build _infra-provide
-	./mvnw -f app spring-boot:run
+	./mvnw -f spring-app-root/app spring-boot:run
 
 docker-build-image: _build
-	docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest app/.
+	docker image build -f spring-app-root/app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest spring-app-root/app/.
 
 docker-run: _build
 	docker-compose up --build -d

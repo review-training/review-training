@@ -6,9 +6,6 @@ import nom.brunokarpo.review.app.resources.dtos.ReviewSummaryDTOResource
 import nom.brunokarpo.review.app.resources.dtos.converter.ReviewSummaryDTOToReviewSummaryDTOResourceConverter
 import nom.brunokarpo.review.core.controllers.ReviewSummaryController
 import nom.brunokarpo.review.core.controllers.dtos.ReviewSummaryDTO
-import nom.brunokarpo.review.core.controllers.dtos.converters.ReviewSummaryToReviewSummaryDTO
-import nom.brunokarpo.review.core.model.ReviewSummary
-import nom.brunokarpo.review.core.usercases.RetrieveSummaryReviewByRestaurantIdUseCase
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import java.util.*

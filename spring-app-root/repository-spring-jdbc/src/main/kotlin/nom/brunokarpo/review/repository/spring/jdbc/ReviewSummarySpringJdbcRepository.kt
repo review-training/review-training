@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
 import java.lang.Exception
 import java.util.*
-import kotlin.math.ceil
 
 @Repository
 class ReviewSummarySpringJdbcRepository(

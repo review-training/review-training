@@ -22,7 +22,7 @@ make _build
 To run project locally use the following command:
 
 ```shell script
-./mvnw -f app compile quarkus:dev
+./mvnw -f spring-app-root/app spring-boot:run
 ```
 
 You can use `make` client as well:
@@ -46,6 +46,7 @@ make docker-build-image
 ## Running docker container locally
 
 ```shell script
+docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest spring-app-root/app/.
 docker container run --rm --publish 8080:8080 --name review-app brunokarpo/review-app:latest
 ```
 
