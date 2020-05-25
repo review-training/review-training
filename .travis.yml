@@ -27,7 +27,7 @@ script:
   - ./mvnw clean verify -Pcoverage sonar:sonar -Dsonar.projectKey=brunokarpo_review-training
 
 after_success:
-  - docker image build -f spring-app-root/app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest -t brunokarpo/review-app:$TAG app/.
+  - docker image build -f spring-app-root/app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest -t brunokarpo/review-app:$TAG spring-app-root/app/.
 
 before_deploy:
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
