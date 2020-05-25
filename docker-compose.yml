@@ -30,7 +30,7 @@ services:
 
   app:
     build:
-      context: app/
+      context: spring-app-root/app/
       dockerfile: src/main/docker/Dockerfile.jvm
     restart: on-failure
     environment:
