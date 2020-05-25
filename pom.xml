@@ -21,23 +21,19 @@
     <kotlin.version>1.3.72</kotlin.version>
     <jacoco-plugin.version>0.8.5</jacoco-plugin.version>
     <mockk.version>1.9.3.kotlin12</mockk.version>
-    <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
     <testcontainers.version>1.13.0</testcontainers.version>
     <rest-assured.version>4.3.0</rest-assured.version>
     <flyway-core.version>6.3.2</flyway-core.version>
     <jackson-module-kotlin.version>2.10.1</jackson-module-kotlin.version>
     <postgresql.version>42.2.12</postgresql.version>
-    <springmockk.version>2.0.1</springmockk.version>
   </properties>
 
   <modules>
-    <module>app</module>
     <module>core</module>
     <module>repository-gateway</module>
     <module>database-migrations</module>
-    <module>repository-spring-jdbc</module>
-      <module>messaging-gateway</module>
-    <module>messaging-spring-jms</module>
+    <module>messaging-gateway</module>
+    <module>spring-app-root</module>
   </modules>
 
   <dependencyManagement>
@@ -70,19 +66,7 @@
 
       <dependency>
         <groupId>nom.brunokarpo.review</groupId>
-        <artifactId>app</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>nom.brunokarpo.review</groupId>
         <artifactId>repository-gateway</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>nom.brunokarpo.review</groupId>
-        <artifactId>repository-spring-jdbc</artifactId>
         <version>${project.version}</version>
       </dependency>
 
@@ -96,63 +80,6 @@
         <groupId>nom.brunokarpo.review</groupId>
         <artifactId>messaging-gateway</artifactId>
         <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>nom.brunokarpo.review</groupId>
-        <artifactId>messaging-spring-jms</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <!-- Spring dependencies -->
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter</artifactId>
-        <version>${spring-boot.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-        <version>${spring-boot.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-actuator</artifactId>
-        <version>${spring-boot.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-jdbc</artifactId>
-        <version>${spring-boot.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-activemq</artifactId>
-        <version>${spring-boot.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <version>${spring-boot.version}</version>
-        <scope>test</scope>
-        <exclusions>
-          <exclusion>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-
-      <dependency>
-        <groupId>com.ninja-squad</groupId>
-        <artifactId>springmockk</artifactId>
-        <version>${springmockk.version}</version>
-        <scope>test</scope>
       </dependency>
 
       <!-- Testcontainers dependencies -->
@@ -250,11 +177,6 @@
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>${jacoco-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${spring-boot.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
