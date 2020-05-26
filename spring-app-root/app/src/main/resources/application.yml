@@ -22,4 +22,12 @@ management:
     web:
       base-path: /
       exposure:
-        include: "health,info,metrics"
+        include: "prometheus,health,info,metrics"
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: "review-app"
+    export:
+      prometheus:
+        enabled: true

@@ -6,3 +6,7 @@
 !.mvn
 !.gitignore
 !.travis.yml
+/monitoring/grafana/
+/monitoring/prometheus
+!/monitoring/prometheus/README.md
+!/monitoring/grafana/README.md
