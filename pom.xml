@@ -34,7 +34,7 @@
     <module>database-migrations</module>
     <module>messaging-gateway</module>
     <module>spring-app-root</module>
-      <module>micronaut-app-root</module>
+    <module>micronaut-app-root</module>
   </modules>
 
   <dependencyManagement>
@@ -45,6 +45,12 @@
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-stdlib</artifactId>
         <version>${kotlin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-stdlib-jdk8</artifactId>
+        <version>${kotlin.version}</version>
+        <scope>compile</scope>
       </dependency>
       <dependency>
         <groupId>org.jetbrains.kotlin</groupId>

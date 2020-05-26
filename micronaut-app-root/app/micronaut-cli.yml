@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: nom.brunokarpo.review.micronaut
+---
+testFramework: kotlintest
+sourceLanguage: kotlin
