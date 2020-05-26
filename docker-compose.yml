@@ -4,8 +4,6 @@ services:
     image: grafana/grafana:latest
     ports:
     - 3000:3000
-    volumes:
-    - ./monitoring/grafana:/var/lib/grafana
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=password
@@ -16,7 +14,6 @@ services:
     - 9090:9090
     volumes:
     - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
-    - ./monitoring/prometheus:/prometheus
 
   database:
     image: postgres:9.6-alpine
@@ -42,9 +39,6 @@ services:
     - 8161:8161
     - 61616:61616
     - 61613:61613
-    volumes:
-    - /data/activemq:/data
-    - /var/log/activemq:/var/log/activemq
 
   app:
     build:
