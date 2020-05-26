@@ -34,6 +34,7 @@
     <module>database-migrations</module>
     <module>messaging-gateway</module>
     <module>spring-app-root</module>
+      <module>micronaut-app-root</module>
   </modules>
 
   <dependencyManagement>
