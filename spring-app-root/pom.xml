@@ -17,6 +17,7 @@
     <properties>
         <springmockk.version>2.0.1</springmockk.version>
         <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
+        <micrometer.version>1.5.1</micrometer.version>
     </properties>
 
     <modules>
@@ -96,6 +97,18 @@
                 <artifactId>springmockk</artifactId>
                 <version>${springmockk.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- Micrometer dependecies  -->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-core</artifactId>
+                <version>${micrometer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+                <version>${micrometer.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
