@@ -49,6 +49,9 @@ run-locally: _build _infra-provide
 docker-build-image: _build
 	docker image build -f spring-app-root/app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest spring-app-root/app/.
 
+docker-build-image-micronaut: _build
+	docker image build -f micronaut-app-root/app/Dockerfile -t brunokarpo/review-app:micronaut-latest micronaut-app-root/app/.
+
 docker-run: _build
 	docker-compose up --build -d
 
