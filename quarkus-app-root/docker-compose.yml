@@ -13,7 +13,7 @@ services:
     ports:
     - 9090:9090
     volumes:
-    - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    - ../monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
 
   database:
     image: postgres:9.6-alpine
@@ -42,7 +42,7 @@ services:
 
   app:
     build:
-      context: spring-app-root/app/
+      context: quarkus-app
       dockerfile: src/main/docker/Dockerfile.jvm
     restart: on-failure
     environment:
@@ -54,7 +54,6 @@ services:
       ACTIVEMQ_PASSWORD: admin
     ports:
     - 8080:8080
-    - 8081:8081
     depends_on:
       - database
       - activemq

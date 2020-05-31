@@ -19,7 +19,9 @@ make _build
 ```
 
 ## Running project locally
-To run project locally use the following command:
+This project was build with Spring Boot and Quarkus and you can choose with one you like to run.
+
+### With Spring Boot
 
 ```shell script
 ./mvnw -f spring-app-root/app spring-boot:run
@@ -27,31 +29,40 @@ To run project locally use the following command:
 
 You can use `make` client as well:
 ```shell script
-make run-locally
+make spring-run-locally
 ```
 
-## Building the Docker Image
-
+### With Quarkus
 ```shell script
-docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest app/.
+./mvnw -f quarkus-app-root/quarkus-app quarkus:dev
 ```
 
-With `make`:
-
+You can use `make` client as well:
 ```shell script
-make docker-build-image
+make quarkus-run-locally
 ```
 
 
 ## Running docker container locally
+Like locally execution, you can run with Docker with Spring Boot or Quarkus using Docker Compose description.
+
+### With Spring Boot
 
 ```shell script
-docker image build -f app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest spring-app-root/app/.
-docker container run --rm --publish 8080:8080 --name review-app brunokarpo/review-app:latest
+docker-compose -f spring-app-root/docker-compose.yml up --build -d
 ```
 
-With `make`:
-
+You can use `make` client as well:
 ```shell script
-make docker-run
+make spring-docker-run
+```
+
+### With Quarkus
+```shell script
+docker-compose -f quarkus-app-root/docker-compose.yml up --build -d
+```
+
+You can use `make` client as well:
+```shell script
+make quarkus-docker-run
 ```

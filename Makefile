@@ -1,5 +1,6 @@
 DEFAULT: _package
 
+# Maven commands
 _clean:
 	./mvnw clean
 
@@ -12,6 +13,8 @@ _build: _clean
 build: _clean
 	./mvnw install
 
+
+# Infra providers
 _infra-provide: _infra-stop
 	docker container run --rm --name=review-database \
     	 -e POSTGRES_DB=review \
@@ -43,14 +46,35 @@ _infra-stop:
 	docker container stop review-database || echo "No infra provided"
 	docker container stop review-activemq || echo "No infra provided"
 
-run-locally: _build _infra-provide
-	./mvnw -f spring-app-root/app spring-boot:run
-
+# Dockers
 docker-build-image: _build
 	docker image build -f spring-app-root/app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest spring-app-root/app/.
+	docker image build -f quarkus-app-root/quarkus-app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:quarkus quarkus-app-root/quarkus-app/.
 
 docker-run: _build
 	docker-compose up --build -d
 
+
+# Spring
+spring-run-locally: _build _infra-provide
+	./mvnw -f spring-app-root/app spring-boot:run
+
+spring-docker-run: _build
+	docker-compose -f spring-app-root/docker-compose.yml up --build -d
+
+spring-docker-stop:
+	docker-compose -f spring-app-root/docker-compose.yml down
+
+# Quarkus
+quarkus-run-locally: _build _infra-provide
+	./mvnw -f quarkus-app-root/quarkus-app quarkus:dev
+
+quarkus-docker-run: _build
+	docker-compose -f quarkus-app-root/docker-compose.yml up --build -d
+
+quarkus-docker-stop:
+	docker-compose -f quarkus-app-root/docker-compose.yml down
+
+# Load Tests
 load-test: docker-run
 	./mvnw -f review-load-test clean gatling:test -Dgatling.simulationClass=simulations.SimulationExecution -DUSERS=120 -DRAMP_DURATION=120 -DDURATION=360
