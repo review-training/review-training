@@ -1,1 +1,11 @@
 # Configuration file
+quarkus:
+  datasource:
+    db-kind: postgresql
+    username: review-app
+    password: review-app
+    jdbc:
+      url: jdbc:postgresql://localhost:5432/review
+      driver: org.postgresql.Driver
+  flyway:
+    migrate-at-start: true
