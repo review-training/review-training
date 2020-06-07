@@ -6,19 +6,19 @@ import nom.brunokarpo.review.core.repository.ReviewSummaryRepository
 import nom.brunokarpo.review.quarkus.repositories.ReviewRepositoryJdbc
 import nom.brunokarpo.review.quarkus.repositories.ReviewSummaryRepositoryJdbc
 import javax.enterprise.context.Dependent
-import javax.inject.Inject
 import javax.sql.DataSource
+import javax.ws.rs.Produces
 
 @Dependent
 class RepositoriesConfiguration {
 
-    @Inject
+    @Produces
     @DefaultBean
     fun reviewRepository(dataSource: DataSource): ReviewRepository {
         return ReviewRepositoryJdbc(dataSource)
     }
 
-    @Inject
+    @Produces
     @DefaultBean
     fun reviewSummaryRepository(dataSource: DataSource): ReviewSummaryRepository {
         return ReviewSummaryRepositoryJdbc(dataSource)

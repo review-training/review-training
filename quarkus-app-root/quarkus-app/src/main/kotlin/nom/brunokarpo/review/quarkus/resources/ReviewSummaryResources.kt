@@ -6,7 +6,6 @@ import nom.brunokarpo.review.quarkus.resources.dto.PageDTOResource
 import nom.brunokarpo.review.quarkus.resources.dto.ReviewSummaryDTOResource
 import nom.brunokarpo.review.quarkus.resources.dto.converter.ReviewSummaryDTOToReviewSummaryDTOResourceConverter
 import java.util.*
-import javax.inject.Inject
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
@@ -15,7 +14,6 @@ import javax.ws.rs.core.Response
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 class ReviewSummaryResources(
-        @Inject
         private val reviewSummaryController: ReviewSummaryController
 ) {
 
@@ -25,7 +23,7 @@ class ReviewSummaryResources(
     }
 
     @GET
-    @Path("")
+    @Path("/list")
     fun retrieveSummaryList(size: Int?, page: Int?): Response {
         return Response.ok(PageDTOResource(reviewSummaryController.retrieveList(size ?: 10, page ?: 0)) {
             it.map { element -> ReviewSummaryDTOToReviewSummaryDTOResourceConverter().convert(element as ReviewSummaryDTO) }
