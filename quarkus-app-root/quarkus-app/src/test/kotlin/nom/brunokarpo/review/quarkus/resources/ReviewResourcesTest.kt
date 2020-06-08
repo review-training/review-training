@@ -1,13 +1,12 @@
 package nom.brunokarpo.review.quarkus.resources
 
-import io.quarkus.test.common.QuarkusTestResource
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
 import io.restassured.http.ContentType
 import org.hamcrest.Matchers
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import java.util.UUID
+import java.util.*
 
 @QuarkusTest
 class ReviewResourcesTest {
