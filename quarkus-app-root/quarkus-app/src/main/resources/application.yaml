@@ -9,3 +9,7 @@ quarkus:
       driver: org.postgresql.Driver
   flyway:
     migrate-at-start: true
+  artemis:
+    url: tcp://localhost:61616
+    username: admin
+    password: admin

@@ -12,6 +12,7 @@ import java.util.*
 class ReviewResourcesTest {
 
     @Test
+//    @Disabled("I need to create an process that finish AMQ protocol")
     internal fun `should create new review`() {
         val restId = UUID.randomUUID()!!
         val userId = UUID.randomUUID()!!

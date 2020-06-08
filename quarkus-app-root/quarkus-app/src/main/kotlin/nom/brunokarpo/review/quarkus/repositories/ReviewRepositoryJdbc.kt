@@ -5,8 +5,10 @@ import nom.brunokarpo.review.gateway.repository.ReviewRepositoryGateway
 import java.sql.Connection
 import java.sql.Statement
 import java.sql.Types
+import javax.enterprise.context.ApplicationScoped
 import javax.sql.DataSource
 
+@ApplicationScoped
 class ReviewRepositoryJdbc(
         private val dataSource: DataSource
 ): ReviewRepositoryGateway{

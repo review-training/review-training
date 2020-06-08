@@ -8,8 +8,10 @@ import java.sql.ResultSet
 import java.sql.Statement
 import java.sql.Types
 import java.util.*
+import javax.enterprise.context.ApplicationScoped
 import javax.sql.DataSource
 
+@ApplicationScoped
 class ReviewSummaryRepositoryJdbc(
         private val dataSource: DataSource
 ): ReviewSummaryRepositoryGateway {

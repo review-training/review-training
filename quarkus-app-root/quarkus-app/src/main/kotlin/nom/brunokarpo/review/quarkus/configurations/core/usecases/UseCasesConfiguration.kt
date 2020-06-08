@@ -8,7 +8,7 @@ import nom.brunokarpo.review.core.usercases.CreateNewReviewUseCase
 import nom.brunokarpo.review.core.usercases.RetrieveSummaryReviewByRestaurantIdUseCase
 import nom.brunokarpo.review.core.usercases.RetrieveSummaryReviewListPaginatedUseCase
 import javax.enterprise.context.Dependent
-import javax.ws.rs.Produces
+import javax.enterprise.inject.Produces
 
 @Dependent
 class UseCasesConfiguration {
