@@ -26,19 +26,14 @@ services:
     - 5432:5432
 
   activemq:
-    image: webcenter/activemq:latest
+    image: vromero/activemq-artemis:latest-alpine
     restart: always
     environment:
-      ACTIVEMQ_CONFIG_NAME: amqp-srv1
-      ACTIVEMQ_CONFIG_DEFAULTACCOUNT: "false"
-      ACTIVEMQ_ADMIN_LOGIN: admin
-      ACTIVEMQ_ADMIN_PASSWORD: admin
-      ACTIVEMQ_CONFIG_MINMEMORY: 256
-      ACTIVEMQ_CONFIG_MAXMEMORY: 1024
+      ARTEMIS_USERNAME: admin
+      ARTEMIS_PASSWORD: admin
     ports:
     - 8161:8161
     - 61616:61616
-    - 61613:61613
 
   app:
     build:

@@ -28,7 +28,6 @@ _infra-provide: _infra-stop
 	  	-e ARTEMIS_PASSWORD=admin \
 		-p 8161:8161 \
 		-p 61616:61616 \
-		-p 5672:5672 \
 		-d vromero/activemq-artemis:2.11.0-alpine
 
 _infra-stop:
