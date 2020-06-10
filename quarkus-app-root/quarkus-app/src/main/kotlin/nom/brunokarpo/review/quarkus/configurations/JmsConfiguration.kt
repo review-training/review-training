@@ -24,7 +24,6 @@ class JmsConfiguration(
     fun jmsContext(): JMSContext
             = connectionFactory.createContext(Session.AUTO_ACKNOWLEDGE)
 
-
     @Produces
     @DefaultBean
     fun objectMapper(): ObjectMapper {

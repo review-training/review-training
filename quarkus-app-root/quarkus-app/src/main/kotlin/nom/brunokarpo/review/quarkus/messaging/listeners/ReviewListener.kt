@@ -1,31 +1,42 @@
 package nom.brunokarpo.review.quarkus.messaging.listeners
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import io.quarkus.runtime.ShutdownEvent
+import io.quarkus.runtime.StartupEvent
 import nom.brunokarpo.review.messaging.consumers.ReviewMessageConsumer
-import nom.brunokarpo.review.quarkus.messaging.messages.ReviewJMSMessage
+import nom.brunokarpo.review.messaging.consumers.messages.ReviewMessage
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 import javax.enterprise.context.ApplicationScoped
-import javax.jms.ConnectionFactory
-import javax.jms.JMSException
-import javax.jms.Message
-import javax.jms.Session
+import javax.enterprise.event.Observes
+import javax.jms.JMSContext
+import javax.jms.TextMessage
 
 @ApplicationScoped
 class ReviewListener(
         private val reviewMessageConsumer: ReviewMessageConsumer,
-        private val connectionFactory: ConnectionFactory
-) {
-   fun run() {
-        try {
-            val context = connectionFactory.createContext(Session.AUTO_ACKNOWLEDGE)
-            val consumer = context.createConsumer(context.createQueue("queue.NEW_REVIEW_QUEUE"))
-            while (true) {
-                val message: Message? = consumer.receive() ?: return
-                val review = message!!.getBody(ReviewJMSMessage::class.java)
-                reviewMessageConsumer.process(review.asMessage())
-            }
-        } catch (ex: JMSException) {
-            throw RuntimeException(ex)
-        }
+        private val objectMapper: ObjectMapper,
+        private val context: JMSContext
+): Runnable {
+
+    private val scheduler: ExecutorService = Executors.newSingleThreadExecutor()
+
+    fun onStart(@Observes ev: StartupEvent) {
+        scheduler.submit(this)
     }
 
+    fun onStop(@Observes ev: ShutdownEvent) {
+        scheduler.shutdown()
+    }
+
+    override fun run() {
+        val consumer = context.createConsumer(context.createQueue("queue.NEW_REVEIW_QUEUE"))
+        while (true) {
+            val message = consumer.receive() ?: return
+            val textMessage = message as TextMessage
+            val reviewMessage = objectMapper.readValue(textMessage.text, ReviewMessage::class.java)
+            reviewMessageConsumer.process(reviewMessage)
+        }
+    }
 
 }
