@@ -1,5 +1,7 @@
 # Configuration file
 quarkus:
+  resteasy:
+    path: /review
   datasource:
     db-kind: postgresql
     username: review-app

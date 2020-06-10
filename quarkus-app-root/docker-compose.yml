@@ -41,12 +41,12 @@ services:
       dockerfile: src/main/docker/Dockerfile.jvm
     restart: on-failure
     environment:
-      DATABASE_URL: "jdbc:postgresql://database:5432/review"
-      DATABASE_USERNAME: review-app
-      DATABASE_PASSWORD: review-app
-      ACTIVEMQ_URL: "tcp://activemq:61616"
-      ACTIVEMQ_USER: admin
-      ACTIVEMQ_PASSWORD: admin
+      quarkus.datasource.jdbc.url: "jdbc:postgresql://database:5432/review"
+      quarkus.datasource.username: review-app
+      quarkus.datasource.password: review-app
+      quarkus.artemis.url: "tcp://activemq:61616"
+      quarkus.artemis.username: admin
+      quarkus.artemis.password: admin
     ports:
     - 8080:8080
     depends_on:

@@ -53,6 +53,9 @@ spring-docker-run: _build
 spring-docker-stop:
 	docker-compose -f spring-app-root/docker-compose.yml down
 
+spring-load-test: spring-docker-run
+	./mvnw -f review-load-test clean gatling:test -Dgatling.simulationClass=simulations.SimulationExecution -DUSERS=120 -DRAMP_DURATION=120 -DDURATION=360
+
 # Quarkus
 quarkus-run-locally: _build _infra-provide
 	./mvnw -f quarkus-app-root/quarkus-app quarkus:dev
@@ -63,6 +66,5 @@ quarkus-docker-run: _build
 quarkus-docker-stop:
 	docker-compose -f quarkus-app-root/docker-compose.yml down
 
-# Load Tests
-load-test: docker-run
+quarkus-load-test: quarkus-docker-run
 	./mvnw -f review-load-test clean gatling:test -Dgatling.simulationClass=simulations.SimulationExecution -DUSERS=120 -DRAMP_DURATION=120 -DDURATION=360
