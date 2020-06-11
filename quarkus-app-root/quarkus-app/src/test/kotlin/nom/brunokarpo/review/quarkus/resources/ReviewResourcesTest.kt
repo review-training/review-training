@@ -12,7 +12,6 @@ import java.util.*
 class ReviewResourcesTest {
 
     @Test
-    @Disabled("I need to provide a dinamic queue service")
     internal fun `should create new review`() {
         val restId = UUID.randomUUID()!!
         val userId = UUID.randomUUID()!!

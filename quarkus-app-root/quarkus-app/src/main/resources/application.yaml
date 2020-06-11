@@ -15,3 +15,18 @@ quarkus:
     url: tcp://localhost:61616
     username: admin
     password: admin
+
+
+# test
+# following https://www.javacodegeeks.com/2020/02/quarkus-tests-with-testcontainers-and-postgresql.html
+"%test":
+  quarkus:
+    resteasy:
+      path: /
+    # dialect must be set explicitly
+    hibernate-orm:
+      dialect: org.hibernate.dialect.PostgreSQL9Dialect
+    datasource:
+      jdbc:
+        url: jdbc:tc:postgresql:latest:///review
+        driver: org.testcontainers.jdbc.ContainerDatabaseDriver
