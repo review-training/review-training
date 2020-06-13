@@ -24,7 +24,7 @@ class ReviewSummaryResources(
 
     @GET
     @Path("/list")
-    fun retrieveSummaryList(size: Int?, page: Int?): Response {
+    fun retrieveSummaryList(@QueryParam("size") size: Int?, @QueryParam("page") page: Int?): Response {
         return Response.ok(PageDTOResource(reviewSummaryController.retrieveList(size ?: 10, page ?: 0)) {
             it.map { element -> ReviewSummaryDTOToReviewSummaryDTOResourceConverter().convert(element as ReviewSummaryDTO) }
         }).build()
