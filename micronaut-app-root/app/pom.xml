@@ -24,6 +24,8 @@
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
     </properties>
     <dependencies>
+
+        <!-- Kotlin -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
@@ -34,6 +36,8 @@
             <artifactId>kotlin-reflect</artifactId>
             <scope>compile</scope>
         </dependency>
+
+        <!-- Micronaut -->
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-runtime</artifactId>
@@ -69,6 +73,18 @@
             <artifactId>micronaut-test-kotlintest</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Review -->
+        <dependency>
+            <groupId>nom.brunokarpo.review</groupId>
+            <artifactId>repository-gateway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>nom.brunokarpo.review</groupId>
+            <artifactId>database-migrations</artifactId>
+        </dependency>
+
+        <!-- Mockk -->
         <dependency>
             <groupId>io.mockk</groupId>
             <artifactId>mockk</artifactId>
