@@ -15,7 +15,8 @@ quarkus:
     url: tcp://localhost:61616
     username: admin
     password: admin
-
+  smallrye-health:
+    root-path: /metrics
 
 # test
 # following https://www.javacodegeeks.com/2020/02/quarkus-tests-with-testcontainers-and-postgresql.html
