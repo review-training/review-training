@@ -88,6 +88,16 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
         <!-- Review -->
         <dependency>
             <groupId>nom.brunokarpo.review</groupId>
@@ -96,6 +106,10 @@
         <dependency>
             <groupId>nom.brunokarpo.review</groupId>
             <artifactId>database-migrations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>nom.brunokarpo.review</groupId>
+            <artifactId>messaging-gateway</artifactId>
         </dependency>
 
         <!-- Mockk -->
