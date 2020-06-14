@@ -42,6 +42,9 @@ services:
     restart: on-failure
     ports:
       - 8080:8080
+    environment:
+      datasources.default.url: "jdbc:postgresql://database:5432/review"
+      activemq.broker-url: "tcp://activemq:61616"
     depends_on:
       - database
       - activemq

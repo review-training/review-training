@@ -75,3 +75,6 @@ micronaut-docker-run: _build
 
 micronaut-docker-stop:
 	docker-compose -f micronaut-app-root/docker-compose.yml down
+
+micronaut-load-test: micronaut-docker-run
+	./mvnw -f review-load-test clean gatling:test -Dgatling.simulationClass=simulations.SimulationExecution -DUSERS=120 -DRAMP_DURATION=120 -DDURATION=360
