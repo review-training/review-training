@@ -12,3 +12,8 @@ flyway:
   datasources:
     default:
       enabled: true
+
+activemq:
+  broker-url: tcp://localhost:61616
+  user: admin
+  password: admin
