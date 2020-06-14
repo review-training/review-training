@@ -1,5 +1,6 @@
 DEFAULT: _package
 
+# Maven commands
 _clean:
 	./mvnw clean
 
@@ -12,6 +13,8 @@ _build: _clean
 build: _clean
 	./mvnw install
 
+
+# Infra providers
 _infra-provide: _infra-stop
 	docker container run --rm --name=review-database \
     	 -e POSTGRES_DB=review \
@@ -21,33 +24,20 @@ _infra-provide: _infra-stop
     	 -d postgres:9.6-alpine
 
 	docker container run --rm --name=review-activemq \
-		-e 'ACTIVEMQ_CONFIG_NAME=amqp-srv1' \
-		-e 'ACTIVEMQ_CONFIG_DEFAULTACCOUNT=false' \
-		-e 'ACTIVEMQ_ADMIN_LOGIN=admin' -e 'ACTIVEMQ_ADMIN_PASSWORD=admin' \
-		-e 'ACTIVEMQ_USERS_myproducer=producerpassword' -e 'ACTIVEMQ_GROUPS_writes=myproducer' \
-		-e 'ACTIVEMQ_USERS_myconsumer=consumerpassword' -e 'ACTIVEMQ_GROUPS_reads=myconsumer' \
-		-e 'ACTIVEMQ_JMX_user1_role=readwrite' -e 'ACTIVEMQ_JMX_user1_password=jmx_password' \
-		-e 'ACTIVEMQ_JMX_user2_role=read' -e 'ACTIVEMQ_JMX_user2_password=jmx2_password' \
-		-e 'ACTIVEMQ_CONFIG_TOPICS_topic1=REVIEW_RESUME_TOPIC' \
-		-e 'ACTIVEMQ_CONFIG_QUEUES_queue1=NEW_REVIEW_QUEUE' \
-		-e 'ACTIVEMQ_CONFIG_MINMEMORY=256' -e  'ACTIVEMQ_CONFIG_MAXMEMORY=1024' \
-		-e 'ACTIVEMQ_CONFIG_SCHEDULERENABLED=true' \
-		-v /data/activemq:/data \
-		-v /var/log/activemq:/var/log/activemq \
+		-e ARTEMIS_USERNAME=admin \
+	  	-e ARTEMIS_PASSWORD=admin \
 		-p 8161:8161 \
 		-p 61616:61616 \
-		-p 61613:61613 \
-		-d webcenter/activemq:latest
+		-d vromero/activemq-artemis:2.11.0-alpine
 
 _infra-stop:
 	docker container stop review-database || echo "No infra provided"
 	docker container stop review-activemq || echo "No infra provided"
 
-run-locally: _build _infra-provide
-	./mvnw -f spring-app-root/app spring-boot:run
-
+# Dockers
 docker-build-image: _build
 	docker image build -f spring-app-root/app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest spring-app-root/app/.
+	docker image build -f quarkus-app-root/quarkus-app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:quarkus quarkus-app-root/quarkus-app/.
 
 docker-build-image-micronaut: _build
 	docker image build -f micronaut-app-root/app/Dockerfile -t brunokarpo/review-app:micronaut-latest micronaut-app-root/app/.
@@ -55,5 +45,29 @@ docker-build-image-micronaut: _build
 docker-run: _build
 	docker-compose up --build -d
 
-load-test: docker-run
+
+# Spring
+spring-run-locally: _build _infra-provide
+	./mvnw -f spring-app-root/app spring-boot:run
+
+spring-docker-run: _build
+	docker-compose -f spring-app-root/docker-compose.yml up --build -d
+
+spring-docker-stop:
+	docker-compose -f spring-app-root/docker-compose.yml down
+
+spring-load-test: spring-docker-run
+	./mvnw -f review-load-test clean gatling:test -Dgatling.simulationClass=simulations.SimulationExecution -DUSERS=120 -DRAMP_DURATION=120 -DDURATION=360
+
+# Quarkus
+quarkus-run-locally: _build _infra-provide
+	./mvnw -f quarkus-app-root/quarkus-app quarkus:dev
+
+quarkus-docker-run: _build
+	docker-compose -f quarkus-app-root/docker-compose.yml up --build -d
+
+quarkus-docker-stop:
+	docker-compose -f quarkus-app-root/docker-compose.yml down
+
+quarkus-load-test: quarkus-docker-run
 	./mvnw -f review-load-test clean gatling:test -Dgatling.simulationClass=simulations.SimulationExecution -DUSERS=120 -DRAMP_DURATION=120 -DDURATION=360

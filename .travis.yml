@@ -28,6 +28,7 @@ script:
 
 after_success:
   - docker image build -f spring-app-root/app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest -t brunokarpo/review-app:$TAG spring-app-root/app/.
+  - docker image build -f quarkus-app-root/quarkus-app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:quarkus -t brunokarpo/review-app:$TAG-quarkus quarkus-app-root/quarkus-app/.
 
 before_deploy:
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
