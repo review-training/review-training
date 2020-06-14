@@ -111,6 +111,10 @@
             <groupId>nom.brunokarpo.review</groupId>
             <artifactId>messaging-gateway</artifactId>
         </dependency>
+        <dependency>
+            <groupId>nom.brunokarpo.review</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
 
         <!-- Mockk -->
         <dependency>
@@ -159,9 +163,6 @@
                         <argument>-noverify</argument>
                         <argument>-XX:TieredStopAtLevel=1</argument>
                         <argument>-Dcom.sun.management.jmxremote</argument>
-
-
-
                         <argument>${exec.mainClass}</argument>
                     </arguments>
                 </configuration>
@@ -262,9 +263,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <proc>none</proc>
-                    <source>1.8</source>
-                    <target>1.8</target>
+<!--                    <proc>none</proc>-->
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <release>${jdk.version}</release>
                 </configuration>
                 <executions>
                     <execution>
