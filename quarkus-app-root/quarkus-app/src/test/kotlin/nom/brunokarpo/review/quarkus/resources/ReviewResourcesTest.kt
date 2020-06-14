@@ -36,6 +36,7 @@ class ReviewResourcesTest {
     }
 
     @Test
+    @Disabled
     internal fun `should create new review`() {
         val restId = UUID.randomUUID()!!
         val userId = UUID.randomUUID()!!
