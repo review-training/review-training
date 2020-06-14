@@ -1,0 +1,33 @@
+# Configuration file
+quarkus:
+  resteasy:
+    path: /review
+  datasource:
+    db-kind: postgresql
+    username: review-app
+    password: review-app
+    jdbc:
+      url: jdbc:postgresql://localhost:5432/review
+      driver: org.postgresql.Driver
+  flyway:
+    migrate-at-start: true
+  artemis:
+    url: tcp://localhost:61616
+    username: admin
+    password: admin
+  smallrye-health:
+    root-path: /metrics
+
+# test
+# following https://www.javacodegeeks.com/2020/02/quarkus-tests-with-testcontainers-and-postgresql.html
+"%test":
+  quarkus:
+    resteasy:
+      path: /
+    # dialect must be set explicitly
+    hibernate-orm:
+      dialect: org.hibernate.dialect.PostgreSQL9Dialect
+    datasource:
+      jdbc:
+        url: jdbc:tc:postgresql:latest:///review
+        driver: org.testcontainers.jdbc.ContainerDatabaseDriver
