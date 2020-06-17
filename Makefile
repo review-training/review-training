@@ -38,10 +38,7 @@ _infra-stop:
 docker-build-image: _build
 	docker image build -f spring-app-root/app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:latest spring-app-root/app/.
 	docker image build -f quarkus-app-root/quarkus-app/src/main/docker/Dockerfile.jvm -t brunokarpo/review-app:quarkus quarkus-app-root/quarkus-app/.
-
-docker-run: _build
-	docker-compose up --build -d
-
+	docker image build -f micronaut-app-root/app/src/main/docker/Dockerfile -t brunokarpo/review-app:micronaut micronaut-app-root/app/.
 
 # Spring
 spring-run-locally: _build _infra-provide
@@ -67,4 +64,17 @@ quarkus-docker-stop:
 	docker-compose -f quarkus-app-root/docker-compose.yml down
 
 quarkus-load-test: quarkus-docker-run
+	./mvnw -f review-load-test clean gatling:test -Dgatling.simulationClass=simulations.SimulationExecution -DUSERS=120 -DRAMP_DURATION=120 -DDURATION=360
+
+# Micronaut
+micronaut-run-locally: _build _infra-provide
+	./mvnw -f micronaut-app-root/app compile exec:exec
+
+micronaut-docker-run: _build
+	docker-compose -f micronaut-app-root/docker-compose.yml up --build -d
+
+micronaut-docker-stop:
+	docker-compose -f micronaut-app-root/docker-compose.yml down
+
+micronaut-load-test: micronaut-docker-run
 	./mvnw -f review-load-test clean gatling:test -Dgatling.simulationClass=simulations.SimulationExecution -DUSERS=120 -DRAMP_DURATION=120 -DDURATION=360

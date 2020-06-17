@@ -10,3 +10,4 @@
 /monitoring/prometheus
 !/monitoring/prometheus/README.md
 !/monitoring/grafana/README.md
+**/*/dependency-reduced-pom.xml

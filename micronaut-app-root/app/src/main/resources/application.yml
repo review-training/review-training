@@ -1,0 +1,21 @@
+micronaut:
+  application:
+    name: micronaut-app
+  server:
+    context-path: /review
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/review
+    username: review-app
+    password: review-app
+    driver-class-name: org.postgresql.Driver
+flyway:
+  datasources:
+    default:
+      enabled: true
+
+activemq:
+  broker-url: tcp://localhost:61616
+  user: admin
+  password: admin

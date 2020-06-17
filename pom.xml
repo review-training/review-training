@@ -26,6 +26,7 @@
     <flyway-core.version>6.3.2</flyway-core.version>
     <jackson-module-kotlin.version>2.10.1</jackson-module-kotlin.version>
     <postgresql.version>42.2.12</postgresql.version>
+    <activemq.version>5.15.12</activemq.version>
   </properties>
 
   <modules>
@@ -34,6 +35,7 @@
     <module>database-migrations</module>
     <module>messaging-gateway</module>
     <module>spring-app-root</module>
+    <module>micronaut-app-root</module>
     <module>quarkus-app-root</module>
   </modules>
 
@@ -45,6 +47,12 @@
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-stdlib</artifactId>
         <version>${kotlin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-stdlib-jdk8</artifactId>
+        <version>${kotlin.version}</version>
+        <scope>compile</scope>
       </dependency>
       <dependency>
         <groupId>org.jetbrains.kotlin</groupId>
@@ -125,6 +133,13 @@
         <artifactId>postgresql</artifactId>
         <version>${postgresql.version}</version>
       </dependency>
+
+      <dependency>
+        <groupId>org.apache.activemq</groupId>
+        <artifactId>activemq-all</artifactId>
+        <version>${activemq.version}</version>
+      </dependency>
+
 
       <dependency>
         <groupId>org.flywaydb</groupId>
