@@ -25,7 +25,7 @@
     <rest-assured.version>4.3.0</rest-assured.version>
     <flyway-core.version>6.3.2</flyway-core.version>
     <jackson-module-kotlin.version>2.10.1</jackson-module-kotlin.version>
-    <postgresql.version>42.2.12</postgresql.version>
+    <postgresql.version>42.2.25</postgresql.version>
     <activemq.version>5.15.12</activemq.version>
   </properties>
 
