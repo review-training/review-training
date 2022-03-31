@@ -16,7 +16,7 @@
 
     <properties>
         <springmockk.version>2.0.1</springmockk.version>
-        <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
+        <spring-boot.version>2.5.12</spring-boot.version>
         <micrometer.version>1.5.1</micrometer.version>
     </properties>
 
